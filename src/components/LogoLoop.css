@@ -199,3 +199,37 @@
   z-index: 10;
   pointer-events: auto;
 }
+
+/* Light Theme: Authentic Brand Colors & High Contrast on Ceramic Canvas */
+[data-theme="light"] .logoloop__item img {
+  filter: none;
+  opacity: 0.92;
+}
+
+[data-theme="light"] .logoloop__item:hover img,
+[data-theme="light"] .logoloop__item[data-active] img {
+  filter: none;
+  opacity: 1;
+}
+
+/* Invert pure white Ollama SVG in light mode so it displays as an iconic jet-black llama */
+[data-theme="light"] .logoloop__item img[src*="ollama"] {
+  filter: invert(1) contrast(1.6);
+  opacity: 0.9;
+}
+
+[data-theme="light"] .logoloop__item:hover img[src*="ollama"],
+[data-theme="light"] .logoloop__item[data-active] img[src*="ollama"] {
+  filter: invert(1) contrast(1.6);
+  opacity: 1;
+}
+
+[data-theme="light"] .logoloop__content {
+  color: #18181b;
+}
+
+[data-theme="light"] .logoloop[data-labels='below'] .logoloop__label {
+  color: #09090b;
+  font-weight: 600;
+  text-shadow: 0 1px 3px rgba(255, 255, 255, 0.95);
+}

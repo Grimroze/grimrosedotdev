@@ -727,7 +727,8 @@ export default function App() {
                 <div className="about-folder-stage">
                   <Folder
                     label="GOLDI.SONI"
-                    color="#202025"
+                    color={theme === 'light' ? '#2563eb' : '#202025'}
+                    theme={theme}
                     paperColor="#ffffff"
                     tabPosition="right"
                     mode="flap"
@@ -745,7 +746,6 @@ export default function App() {
                     zoomOnClick={false}
                     peek={true}
                     intro={false}
-                    theme="dark"
                     items={ABOUT_DOCS}
                     onItemClick={(item, index) => {
                       setFocusedDocIndex(index);

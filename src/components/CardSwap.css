@@ -1,0 +1,573 @@
+/* ==========================================================================
+   CardSwap.css - 3D Interactive Stacked Card Swap
+   ========================================================================== */
+
+.card-swap {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.card-swap-sizer {
+  max-height: 100%;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.card-swap-sizer > span {
+  display: block;
+  width: 100%;
+  max-width: var(--swap-stage-w);
+  aspect-ratio: var(--swap-ratio);
+}
+
+.card-swap-stage {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: var(--swap-stage-w);
+  height: var(--swap-stage-h);
+  perspective: 900px;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+
+.card-swap-slot {
+  position: absolute;
+  top: var(--swap-oy);
+  left: var(--swap-ox);
+  width: var(--swap-w);
+  height: var(--swap-h);
+  margin: calc(var(--swap-h) / -2) 0 0 calc(var(--swap-w) / -2);
+  border-radius: var(--swap-radius);
+  overflow: hidden;
+  isolation: isolate;
+  box-shadow: var(--swap-shadow);
+  pointer-events: auto;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: pan-y;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+.card-swap:focus-visible .card-swap-slot[data-front] {
+  outline: 2px solid var(--swap-ink);
+  outline-offset: 3px;
+}
+
+.card-swap-shade {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  border-radius: inherit;
+  background: var(--swap-shade);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.22s ease;
+}
+
+.card-swap-card {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  border-radius: inherit;
+  overflow: hidden;
+  isolation: isolate;
+  background: var(--swap-tile);
+  color: var(--swap-ink);
+}
+
+.card-swap-card-rim {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  border-radius: inherit;
+  box-shadow:
+    inset 0 0 0 1px var(--swap-tile-edge),
+    inset 0 1px 0 var(--swap-tile-highlight);
+  pointer-events: none;
+}
+
+/* ==========================================================================
+   macOS Window Engineering Project Card Custom Styles
+   ========================================================================== */
+
+.proj-swap-card {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  background: #000000;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.16), 0 24px 60px rgba(0, 0, 0, 0.95);
+  color: #ffffff;
+  font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
+  overflow: hidden;
+  border-radius: inherit;
+}
+
+/* Subtle background telemetry grid line */
+.proj-swap-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+  background-size: 30px 30px;
+  opacity: 0.7;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.proj-card-content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: space-between;
+}
+
+/* macOS Window Titlebar */
+.proj-mac-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 22px;
+  background: rgba(255, 255, 255, 0.025);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  flex-shrink: 0;
+}
+
+.proj-mac-left {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.proj-mac-dots {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.mac-dot {
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  position: relative;
+  transition: transform 0.18s ease, filter 0.18s ease;
+}
+
+.mac-dot-red {
+  background: #ff5f56;
+  border: 1px solid rgba(224, 68, 62, 0.6);
+  box-shadow: 0 0 7px rgba(255, 95, 86, 0.35);
+}
+
+.mac-dot-yellow {
+  background: #ffbd2e;
+  border: 1px solid rgba(222, 161, 35, 0.6);
+  box-shadow: 0 0 7px rgba(255, 189, 46, 0.35);
+}
+
+.mac-dot-green {
+  background: #27c93f;
+  border: 1px solid rgba(26, 171, 45, 0.6);
+  box-shadow: 0 0 7px rgba(39, 201, 63, 0.35);
+}
+
+.proj-swap-card:hover .mac-dot {
+  transform: scale(1.08);
+}
+
+.proj-mac-path-label {
+  display: flex;
+  align-items: center;
+  font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, monospace;
+  font-size: 11.5px;
+  letter-spacing: -0.01em;
+}
+
+.proj-mac-prefix {
+  color: rgba(255, 255, 255, 0.35);
+}
+
+.proj-mac-slug {
+  color: #faedf1;
+  font-weight: 600;
+}
+
+/* Minimal Action Link Buttons */
+.proj-mac-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  pointer-events: auto;
+}
+
+.proj-action-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  height: 30px;
+  padding: 0 12px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: rgba(255, 255, 255, 0.85);
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 11.5px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.proj-action-btn:hover {
+  background: rgba(255, 255, 255, 0.14);
+  border-color: rgba(250, 237, 241, 0.45);
+  color: #ffffff;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
+}
+
+.proj-action-arrow {
+  opacity: 0.6;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.proj-action-btn:hover .proj-action-arrow {
+  opacity: 1;
+  transform: translate(1px, -1px);
+}
+
+/* Card Interior Body */
+.proj-card-main {
+  padding: 20px 24px 12px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  flex: 1;
+}
+
+.proj-card-heading-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.proj-card-title {
+  margin: 0;
+  font-size: clamp(23px, 2.5vw, 28px);
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  color: #ffffff;
+  line-height: 1.15;
+}
+
+.proj-card-badge {
+  display: inline-flex;
+  align-items: center;
+  font-size: 9.5px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #faedf1;
+  background: rgba(250, 237, 241, 0.08);
+  border: 1px solid rgba(250, 237, 241, 0.2);
+  padding: 3px 10px;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+
+.proj-card-subtitle {
+  font-size: 14px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.88);
+  line-height: 1.35;
+}
+
+.proj-card-desc {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.52);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  text-wrap: pretty;
+}
+
+/* Telemetry Inset Console Box */
+.proj-card-metrics {
+  background: rgba(0, 0, 0, 0.45);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  padding: 12px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.proj-metrics-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 6px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.proj-metrics-tag {
+  color: rgba(255, 255, 255, 0.35);
+  font-weight: 600;
+}
+
+.proj-metrics-status {
+  color: #61dca3;
+  font-weight: 700;
+}
+
+.proj-metrics-body {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.proj-metric-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, monospace;
+}
+
+.proj-metric-dot {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: #faedf1;
+  box-shadow: 0 0 6px rgba(250, 237, 241, 0.6);
+  flex-shrink: 0;
+}
+
+.proj-metric-label {
+  color: rgba(255, 255, 255, 0.42);
+  min-width: 100px;
+}
+
+.proj-metric-value {
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.proj-metric-value.is-highlight {
+  color: #61dca3;
+  font-weight: 600;
+}
+
+/* Card Footer: Tech Stack Chips */
+.proj-card-footer {
+  padding: 10px 24px 20px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.proj-tech-stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.proj-tech-pill {
+  font-size: 11px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.58);
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 3px 9px;
+  border-radius: 6px;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+/* ==========================================================================
+   Work Deck Layout & Minimal Left Meta Column
+   ========================================================================== */
+
+/* Work Section Clean Minimal Title */
+.work-header-block {
+  margin-bottom: clamp(32px, 4.5vh, 52px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.work-header-title {
+  font-family: 'Space Grotesk', -apple-system, sans-serif;
+  font-size: clamp(30px, 4vw, 50px);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  color: #ffffff;
+  margin: 0;
+  line-height: 1.15;
+}
+
+.work-deck-layout {
+  position: relative;
+  width: 100%;
+  max-width: 1260px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(32px, 5vw, 64px);
+  margin: 0 auto;
+  pointer-events: auto;
+  opacity: 0;
+  transform: perspective(1200px) translateY(36px) rotateX(6deg) scale(0.97);
+  filter: blur(8px);
+  transition:
+    opacity 1.1s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 1.1s cubic-bezier(0.16, 1, 0.3, 1),
+    filter 1.1s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.work-deck-layout.deck-revealed {
+  opacity: 1;
+  transform: perspective(1200px) translateY(0) rotateX(0deg) scale(1);
+  filter: blur(0px);
+}
+
+/* Minimalist Left Side Column (Zero background box, pure high-craft typography) */
+.work-side-col {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+  gap: 36px;
+  width: 220px;
+  flex-shrink: 0;
+  user-select: none;
+}
+
+.work-side-block {
+  display: flex;
+  flex-direction: column;
+}
+
+.work-side-title {
+  font-family: 'Space Grotesk', -apple-system, sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.45);
+  letter-spacing: 0.04em;
+  text-transform: lowercase;
+}
+
+.work-side-counter {
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 12px;
+  color: #faedf1;
+  font-weight: 500;
+  margin-top: 5px;
+  letter-spacing: 0.06em;
+}
+
+.work-side-github-block {
+  display: flex;
+  flex-direction: column;
+}
+
+.work-side-github-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  color: rgba(255, 255, 255, 0.72);
+  font-family: 'Space Grotesk', -apple-system, sans-serif;
+  font-size: 13.5px;
+  font-weight: 500;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  text-decoration-color: rgba(255, 255, 255, 0.25);
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.work-side-github-link:hover {
+  color: #ffffff;
+  text-decoration-color: #faedf1;
+  transform: translateY(-1px);
+}
+
+.work-side-github-sub {
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.32);
+  margin-top: 6px;
+  letter-spacing: -0.01em;
+}
+
+/* Right / Center 3D Stack Container */
+.work-cards-col {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
+  width: 100%;
+}
+
+.proj-deck-viewport {
+  position: relative;
+  width: 100%;
+  height: clamp(520px, 62vh, 620px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  perspective: 1200px;
+}
+
+@media (max-width: 960px) {
+  .work-deck-layout {
+    flex-direction: column-reverse;
+    gap: 32px;
+    align-items: center;
+  }
+  .work-side-col {
+    width: auto;
+    align-items: center;
+    text-align: center;
+    gap: 20px;
+  }
+  .work-side-github-block {
+    align-items: center;
+  }
+}
+
+@media (max-width: 768px) {
+  .proj-deck-viewport {
+    height: 480px;
+  }
+  .proj-card-main {
+    padding: 16px 16px 10px 16px;
+  }
+  .proj-card-footer {
+    padding: 10px 16px 14px 16px;
+  }
+  .proj-mac-topbar {
+    padding: 12px 16px;
+  }
+}

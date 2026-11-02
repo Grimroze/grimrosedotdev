@@ -1,0 +1,99 @@
+/* ==========================================================================
+   AiOrbTrigger.css - Pure Floating 3D Reactive Glass AI Orb
+   ========================================================================== */
+
+.ai-orb-launcher {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 85;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: auto;
+  user-select: none;
+  animation: orbBloom 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  transition:
+    opacity 0.38s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.38s cubic-bezier(0.16, 1, 0.3, 1),
+    filter 0.38s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform, filter;
+}
+
+@keyframes orbBloom {
+  0% {
+    opacity: 0;
+    transform: scale(0.6) translateY(16px);
+    filter: blur(8px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+    filter: blur(0px);
+  }
+}
+
+/* Vanish quickly and smoothly when scrolling anywhere */
+.ai-orb-launcher.is-scrolling {
+  opacity: 0 !important;
+  transform: scale(0.68) translateY(14px) !important;
+  filter: blur(5px) !important;
+  pointer-events: none !important;
+  transition:
+    opacity 0.18s ease-out,
+    transform 0.18s ease-out,
+    filter 0.18s ease-out;
+}
+
+/* Return smoothly when user stops scrolling */
+.ai-orb-launcher.is-idle {
+  opacity: 1;
+  transform: scale(1) translateY(0);
+  filter: blur(0px);
+  pointer-events: auto;
+  transition:
+    opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+    filter 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Circular 3D Glass Button - Pure, borderless minimal */
+.ai-orb-btn {
+  position: relative;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  border: none;
+  background: transparent;
+  padding: 0;
+  cursor: pointer;
+  outline: none;
+  overflow: visible;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.25s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.ai-orb-btn:hover {
+  transform: scale(1.1);
+}
+
+.ai-orb-btn:active {
+  transform: scale(0.95);
+}
+
+.ai-orb-btn.is-active {
+  opacity: 0.85;
+}
+
+.ai-orb-canvas-wrap {
+  position: absolute;
+  inset: -6px;
+  width: calc(100% + 12px);
+  height: calc(100% + 12px);
+  pointer-events: none;
+  border-radius: 50%;
+  overflow: hidden;
+}

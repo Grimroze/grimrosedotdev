@@ -1,0 +1,135 @@
+/* ==========================================================================
+   Site Preloader (CNN Neural Reconstruction Latent Loader)
+   ========================================================================== */
+
+.site-preloader-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 999999;
+  background-color: rgba(4, 4, 6, 0.4);
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  overscroll-behavior: none;
+  touch-action: none;
+  user-select: none;
+  opacity: 1;
+  transform: scale(1);
+  transition:
+    opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.75s cubic-bezier(0.16, 1, 0.3, 1),
+    backdrop-filter 0.75s ease,
+    -webkit-backdrop-filter 0.75s ease;
+  pointer-events: auto;
+  cursor: pointer;
+}
+
+.site-preloader-overlay.is-fading {
+  opacity: 0;
+  transform: scale(1.03);
+  backdrop-filter: blur(0px);
+  -webkit-backdrop-filter: blur(0px);
+  pointer-events: none;
+}
+
+.site-preloader-card {
+  width: 100%;
+  max-width: 390px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: default;
+}
+
+.site-preloader-header {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  color: rgba(255, 255, 255, 0.4);
+  margin-bottom: 14px;
+  text-transform: uppercase;
+}
+
+.site-preloader-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.site-preloader-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.6);
+}
+
+.site-preloader-frame {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.site-preloader-telemetry {
+  width: 100%;
+  margin-top: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.site-preloader-track {
+  width: 100%;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 9999px;
+  overflow: hidden;
+}
+
+.site-preloader-bar {
+  height: 100%;
+  background: #ffffff;
+  transition: width 0.15s linear;
+}
+
+.site-preloader-status-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  color: rgba(255, 255, 255, 0.4);
+  text-transform: uppercase;
+}
+
+.site-preloader-step {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.site-preloader-skip {
+  margin-top: 20px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  color: rgba(255, 255, 255, 0.25);
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-transform: uppercase;
+  transition: color 0.2s ease;
+  outline: none;
+  padding: 4px 8px;
+}
+
+.site-preloader-skip:hover {
+  color: rgba(255, 255, 255, 0.7);
+}

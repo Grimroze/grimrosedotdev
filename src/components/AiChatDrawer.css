@@ -1,0 +1,394 @@
+/* ==========================================================================
+   AiChatDrawer.css - Ultra-Dark Minimal AI Assistant (Eigen Editorial Edition)
+   - 10% Expanded Viewport (430px x 580px)
+   - Unified Newsreader Serif Typography (matches 'eigen')
+   - Crisp White User Input Pill
+   - Unboxed Floating ThoughtLine Stream
+   - Graceful Stop / Terminate State Handling
+   ========================================================================== */
+
+.ai-chat-drawer-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 80;
+  pointer-events: auto;
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+  padding: 0 24px 92px 0;
+  background: rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  animation: drawerFadeIn 0.2s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes drawerFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* 10% Increased Card Size: 430px width x 580px height */
+.ai-chat-drawer-card {
+  position: relative;
+  width: min(430px, calc(100vw - 32px));
+  height: min(580px, calc(100vh - 100px));
+  max-height: 85vh;
+  display: flex;
+  flex-direction: column;
+  background: #08080a;
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 18px;
+  box-shadow:
+    0 28px 70px rgba(0, 0, 0, 0.96),
+    0 0 1px rgba(255, 255, 255, 0.1);
+  overflow: hidden;
+  font-family: 'Newsreader', 'Iowan Old Style', 'Charter', Georgia, serif;
+  color: #ffffff;
+  animation: drawerPopUp 0.25s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes drawerPopUp {
+  from {
+    opacity: 0;
+    transform: translateY(14px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Claude Editorial Header (Clean Brand Only: eigen) */
+.ai-drawer-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 13px 18px;
+  background: #08080a;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  flex-shrink: 0;
+}
+
+.ai-drawer-brand {
+  display: flex;
+  align-items: center;
+}
+
+.ai-drawer-title {
+  font-family: 'Newsreader', 'Iowan Old Style', 'Charter', Georgia, serif;
+  font-size: 19px;
+  font-weight: 500;
+  font-style: normal;
+  letter-spacing: -0.015em;
+  color: #f4f4f6;
+  text-transform: none;
+}
+
+.ai-drawer-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.ai-drawer-icon-btn {
+  width: 26px;
+  height: 26px;
+  border-radius: 7px;
+  border: none;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  outline: none;
+  transition: all 0.15s ease;
+}
+
+.ai-drawer-icon-btn:hover {
+  background: rgba(255, 255, 255, 0.07);
+  color: #ffffff;
+}
+
+/* Messages Flow */
+.ai-drawer-messages-flow {
+  flex: 1 1 0%;
+  min-height: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+  touch-action: pan-y;
+  padding: 16px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  background: #08080a;
+  font-family: 'Newsreader', 'Iowan Old Style', 'Charter', Georgia, serif;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.15) transparent;
+}
+
+.ai-drawer-messages-flow::-webkit-scrollbar {
+  width: 5px;
+}
+
+.ai-drawer-messages-flow::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.ai-drawer-messages-flow::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 999px;
+}
+
+.ai-drawer-messages-flow::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.25);
+}
+
+/* Empty State */
+.ai-drawer-empty-state {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: auto;
+  margin-bottom: auto;
+  padding: 8px 4px;
+}
+
+.ai-empty-prompt {
+  font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 13.5px;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.45);
+  margin: 0;
+}
+
+.ai-starters-list {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.ai-starter-line {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 13px;
+  border-radius: 9px;
+  background: rgba(255, 255, 255, 0.025);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  color: rgba(255, 255, 255, 0.82);
+  font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 13px;
+  font-weight: 450;
+  text-align: left;
+  cursor: pointer;
+  outline: none;
+  transition: all 0.15s ease;
+}
+
+.ai-starter-line:hover {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.12);
+  color: #ffffff;
+  transform: translateY(-1px);
+}
+
+/* Message Rows */
+.ai-drawer-message-row {
+  display: flex;
+  flex-direction: column;
+  max-width: 88%;
+}
+
+.ai-drawer-message-row.from-user {
+  align-self: flex-end;
+}
+
+.ai-drawer-message-row.from-assistant {
+  align-self: flex-start;
+  max-width: 100%;
+}
+
+/* Message Bubbles - Unified Newsreader Font */
+.ai-message-bubble {
+  border-radius: 14px;
+  font-family: 'Newsreader', 'Iowan Old Style', 'Charter', Georgia, serif;
+  font-size: 15px;
+  line-height: 1.68;
+}
+
+/* User Message: Clean white crisp contrast bubble */
+.from-user .ai-message-bubble {
+  background: #ffffff;
+  color: #050507;
+  font-family: 'Newsreader', 'Iowan Old Style', 'Charter', Georgia, serif;
+  font-weight: 500;
+  font-size: 14.5px;
+  line-height: 1.5;
+  padding: 10px 14px;
+  border-radius: 14px;
+  border-bottom-right-radius: 3px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.45);
+}
+
+.from-user .ai-para-line,
+.from-user .ai-message-content {
+  color: #050507 !important;
+  font-family: 'Newsreader', 'Iowan Old Style', 'Charter', Georgia, serif;
+}
+
+.from-user .ai-para-line strong {
+  color: #000000 !important;
+}
+
+/* Assistant Message: Claude unboxed natural flow */
+.from-assistant .ai-message-bubble {
+  background: rgba(255, 255, 255, 0.022);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  color: #ececee;
+  padding: 13px 15px;
+  border-radius: 12px;
+  border-bottom-left-radius: 4px;
+  font-family: 'Newsreader', 'Iowan Old Style', 'Charter', Georgia, serif;
+}
+
+/* Terminated Message State */
+.is-terminated .ai-message-bubble {
+  background: rgba(248, 113, 113, 0.04);
+  border-color: rgba(248, 113, 113, 0.2);
+}
+
+.ai-terminated-text {
+  color: #f87171 !important;
+  font-style: italic;
+  font-size: 15.5px;
+  letter-spacing: 0.01em;
+  margin: 0 !important;
+}
+
+/* Claude-style collapsible thought record above settled answer */
+.ai-message-thought-header {
+  margin-bottom: 7px;
+  padding: 1px 2px;
+}
+
+/* Unboxed Thinking Stream: NO BOX, pure inline shimmer */
+.ai-drawer-thought-stream {
+  display: flex;
+  align-items: center;
+  padding: 8px 4px 6px 4px;
+  background: transparent;
+  border: none;
+}
+
+.ai-para-line {
+  margin: 0 0 8px 0;
+  font-family: 'Newsreader', 'Iowan Old Style', 'Charter', Georgia, serif;
+  font-size: 15px;
+  line-height: 1.68;
+  color: rgba(255, 255, 255, 0.88);
+}
+
+.ai-para-line:last-child {
+  margin-bottom: 0;
+}
+
+.ai-para-line strong {
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.ai-bullet-line {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  margin: 5px 0;
+  font-size: 14.5px;
+  line-height: 1.62;
+  font-family: 'Newsreader', 'Iowan Old Style', 'Charter', Georgia, serif;
+}
+
+.bullet-glyph {
+  color: rgba(255, 255, 255, 0.55);
+  font-weight: bold;
+}
+
+.bullet-text {
+  color: rgba(255, 255, 255, 0.86);
+  font-family: 'Newsreader', 'Iowan Old Style', 'Charter', Georgia, serif;
+}
+
+.ai-spacer-line {
+  height: 6px;
+}
+
+.ai-inline-code {
+  font-family: 'JetBrains Mono', 'Space Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+  background: rgba(255, 255, 255, 0.08);
+  padding: 2px 5px;
+  border-radius: 4px;
+  font-size: 12px;
+  color: #f4f4f6;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+/* Action button inside message */
+.ai-message-action-wrap {
+  margin-top: 10px;
+  padding-top: 8px;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Real-Time LLM Streaming Cursor - Clean White Minimal */
+.ai-streaming-cursor {
+  display: inline-block;
+  width: 6px;
+  height: 14px;
+  margin-left: 4px;
+  vertical-align: -1px;
+  background: #ffffff;
+  border-radius: 1px;
+  box-shadow: 0 0 4px rgba(255, 255, 255, 0.4);
+  animation: cursorBlink 0.75s infinite ease-in-out;
+}
+
+@keyframes cursorBlink {
+  0%, 100% {
+    opacity: 1;
+    transform: scaleY(1);
+  }
+  50% {
+    opacity: 0.15;
+    transform: scaleY(0.85);
+  }
+}
+
+.ai-message-action-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 10px;
+  border-radius: 7px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.11);
+  color: #ffffff;
+  font-family: inherit;
+  font-size: 12.5px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.ai-message-action-btn:hover {
+  background: rgba(255, 255, 255, 0.12);
+  transform: translateY(-1px);
+}
+
+/* Input Dock */
+.ai-drawer-input-dock {
+  padding: 11px 14px 14px 14px;
+  background: #08080a;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  flex-shrink: 0;
+}

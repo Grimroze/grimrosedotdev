@@ -1,0 +1,314 @@
+/* ==========================================================================
+   DocumentReader.css - High-Fidelity Paper Dossier Document Reader
+   ========================================================================== */
+
+.doc-reader-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.78);
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  padding: 24px;
+  overscroll-behavior: none;
+  touch-action: none;
+  animation: readerFadeIn 0.22s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.doc-reader-backdrop.is-closing {
+  animation: readerFadeOut 0.22s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes readerFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes readerFadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+.doc-reader-paper {
+  position: relative;
+  width: min(92vw, 690px);
+  height: min(84vh, 740px);
+  max-height: 84vh;
+  display: flex;
+  flex-direction: column;
+  background: #ffffff;
+  border-radius: 22px;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  box-shadow:
+    0 35px 100px rgba(0, 0, 0, 0.85),
+    0 10px 35px rgba(0, 0, 0, 0.35),
+    0 0 0 1px rgba(255, 255, 255, 0.2);
+  color: #111114;
+  font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
+  overflow: hidden;
+  animation: readerSlideUp 0.32s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.doc-reader-paper.is-closing {
+  animation: readerSlideDown 0.22s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes readerSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(18px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes readerSlideDown {
+  from {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(14px) scale(0.96);
+  }
+}
+
+/* Header */
+.doc-reader-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 24px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  background: #ffffff;
+  flex-shrink: 0;
+  z-index: 10;
+}
+
+.doc-reader-header-meta {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.doc-reader-badge {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #ffffff;
+  background: #111114;
+  padding: 4px 12px;
+  border-radius: 999px;
+}
+
+.doc-reader-tag {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(0, 0, 0, 0.5);
+}
+
+.doc-reader-close-btn {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  background: rgba(0, 0, 0, 0.04);
+  color: #18181b;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.doc-reader-close-btn:hover {
+  background: #111114;
+  color: #ffffff;
+  transform: scale(1.06);
+}
+
+/* Scrollable Content Body */
+.doc-reader-body {
+  flex: 1;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: 28px 32px 36px 32px;
+  box-sizing: border-box;
+  user-select: text;
+  -webkit-user-select: text;
+}
+
+/* Custom Scrollbar for Paper */
+.doc-reader-body::-webkit-scrollbar {
+  width: 6px;
+}
+
+.doc-reader-body::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.03);
+}
+
+.doc-reader-body::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.18);
+  border-radius: 999px;
+}
+
+.doc-reader-body::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.32);
+}
+
+/* Typography inside Document */
+.doc-reader-title {
+  margin: 0 0 6px 0;
+  font-size: clamp(21px, 2.3vw, 26px);
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  color: #111114;
+  line-height: 1.25;
+}
+
+.doc-reader-subtitle {
+  margin: 0 0 20px 0;
+  font-size: 13px;
+  font-weight: 500;
+  color: rgba(0, 0, 0, 0.62);
+  line-height: 1.45;
+}
+
+.doc-reader-desc {
+  margin: 0 0 20px 0;
+  font-size: 13.5px;
+  line-height: 1.6;
+  color: rgba(24, 24, 28, 0.88);
+  white-space: pre-line;
+}
+
+/* Sections */
+.doc-reader-section {
+  margin-bottom: 22px;
+  padding-bottom: 18px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.07);
+}
+
+.doc-reader-section:last-of-type {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.doc-reader-sec-heading {
+  margin: 0 0 6px 0;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: #18181b;
+}
+
+.doc-reader-sec-text {
+  margin: 0 0 10px 0;
+  font-size: 13.5px;
+  line-height: 1.62;
+  color: rgba(24, 24, 28, 0.88);
+  white-space: pre-line;
+}
+
+/* Bullets */
+.doc-reader-bullets {
+  margin: 6px 0 10px 20px;
+  padding: 0;
+}
+
+.doc-reader-bullets li {
+  font-size: 13px;
+  line-height: 1.62;
+  color: rgba(24, 24, 28, 0.88);
+  margin-bottom: 7px;
+}
+
+/* Chips / Tags */
+.doc-reader-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin-top: 8px;
+}
+
+.doc-reader-chip {
+  font-size: 11.5px;
+  font-weight: 500;
+  padding: 4px 11px;
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.04);
+  border: 1px solid rgba(0, 0, 0, 0.09);
+  color: #1f2937;
+  letter-spacing: 0.01em;
+}
+
+.doc-reader-chip.highlight {
+  background: rgba(0, 0, 0, 0.06);
+  font-weight: 600;
+  color: #111114;
+}
+
+/* Items Section */
+.doc-reader-items-wrap {
+  margin-top: 22px;
+  padding-top: 18px;
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.doc-reader-items-label {
+  display: block;
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: rgba(0, 0, 0, 0.45);
+  margin-bottom: 8px;
+  text-transform: uppercase;
+}
+
+/* Text-Only Action Link Box */
+.doc-reader-link-box {
+  margin-top: 24px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.doc-reader-text-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: transparent !important;
+  border: none !important;
+  padding: 0 !important;
+  color: #111114;
+  font-family: 'Space Grotesk', -apple-system, sans-serif;
+  font-size: 13.5px;
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+  box-shadow: none !important;
+}
+
+.doc-reader-text-link:hover {
+  background: transparent !important;
+  opacity: 0.65;
+  box-shadow: none !important;
+}

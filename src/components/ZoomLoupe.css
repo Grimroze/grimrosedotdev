@@ -1,0 +1,350 @@
+/* ==========================================================================
+   ZoomLoupe.css - Precision Optical Loupe Styling & Standalone Card Typography
+   ========================================================================== */
+
+.zoom-loupe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 120;
+  overflow: visible;
+  opacity: 0;
+  transform: scale(0.9);
+  transition: opacity 0.22s cubic-bezier(0.16, 1, 0.3, 1), transform 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform;
+  user-select: none;
+  pointer-events: none; /* Allows user to click folder & docs right through the lens body */
+}
+
+.zoom-loupe.active {
+  opacity: 1;
+}
+
+/* Shapes */
+.zoom-loupe.lens {
+  border-radius: 50%;
+}
+
+.zoom-loupe.pill {
+  border-radius: 999px;
+}
+
+.zoom-loupe.frame {
+  border-radius: 26px;
+}
+
+/* Optical Viewing Chamber (Clipped Aperture) */
+.zoom-loupe-chamber {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  background: #ffffff;
+  box-shadow:
+    inset 0 0 20px rgba(0, 0, 0, 0.45),
+    0 24px 60px rgba(0, 0, 0, 0.8),
+    0 0 0 1px rgba(255, 255, 255, 0.2);
+}
+
+.zoom-loupe.lens .zoom-loupe-chamber {
+  border-radius: 50%;
+}
+
+.zoom-loupe.pill .zoom-loupe-chamber {
+  border-radius: 999px;
+}
+
+.zoom-loupe.frame .zoom-loupe-chamber {
+  border-radius: 26px;
+}
+
+.zoom-loupe-scaler {
+  position: absolute;
+  top: 0;
+  left: 0;
+  will-change: transform;
+  transform-origin: 0 0;
+}
+
+/* Standalone High-Fidelity Mirrored Card inside Loupe */
+.zoom-loupe-card-mirror {
+  position: relative;
+  width: 540px;
+  min-height: 760px;
+  background: #ffffff;
+  border-radius: 22px;
+  box-sizing: border-box;
+  padding: 28px 30px;
+  overflow: hidden;
+}
+
+.loupe-doc-card {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  color: #111114;
+  font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+/* Header & Tags */
+.loupe-doc-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 12px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.loupe-doc-tag {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #18181b;
+  opacity: 0.85;
+}
+
+.loupe-doc-badge {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #27272a;
+  background: rgba(0, 0, 0, 0.04);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  padding: 3px 10px;
+  border-radius: 999px;
+}
+
+/* Title & Subtitle */
+.loupe-doc-title {
+  margin: 0 0 6px 0;
+  color: #111114;
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.25;
+}
+
+.loupe-doc-subtitle {
+  margin: 0 0 14px 0;
+  color: rgba(0, 0, 0, 0.65);
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+.loupe-doc-description {
+  margin: 0 0 14px 0;
+  color: rgba(22, 22, 26, 0.85);
+  font-size: 12px;
+  line-height: 1.55;
+  white-space: pre-line;
+}
+
+/* Sections */
+.loupe-doc-section {
+  margin-bottom: 12px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.loupe-doc-section:last-of-type {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.loupe-doc-sec-heading {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: #18181b;
+  margin-bottom: 4px;
+}
+
+.loupe-doc-sec-text {
+  font-size: 11.5px;
+  color: rgba(26, 26, 30, 0.88);
+  line-height: 1.5;
+  white-space: pre-line;
+  margin-bottom: 6px;
+}
+
+.loupe-doc-bullets {
+  margin: 0 0 6px 16px;
+  padding: 0;
+}
+
+.loupe-doc-bullets li {
+  font-size: 11px;
+  line-height: 1.55;
+  color: rgba(26, 26, 30, 0.88);
+  margin-bottom: 3px;
+}
+
+/* Chips */
+.loupe-doc-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin-top: 6px;
+}
+
+.loupe-doc-chip {
+  font-size: 10px;
+  font-weight: 500;
+  padding: 3px 9px;
+  background: rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 999px;
+  color: #1f2937;
+}
+
+/* Links */
+.loupe-doc-link-wrap {
+  margin-top: 14px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.loupe-doc-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 6px 14px;
+  border-radius: 999px;
+  background: #111114;
+  color: #ffffff;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+/* Outer Titanium Bezel Rim */
+.zoom-loupe-rim {
+  position: absolute;
+  inset: -3.5px;
+  border: 3.5px solid rgba(255, 255, 255, 0.6);
+  box-shadow:
+    0 0 0 1px rgba(0, 0, 0, 0.9),
+    inset 0 1px 2px rgba(255, 255, 255, 0.85),
+    inset 0 -1px 2px rgba(0, 0, 0, 0.6),
+    0 24px 50px rgba(0, 0, 0, 0.7);
+  pointer-events: none;
+}
+
+.zoom-loupe.lens .zoom-loupe-rim {
+  border-radius: 50%;
+}
+
+.zoom-loupe.pill .zoom-loupe-rim {
+  border-radius: 999px;
+}
+
+.zoom-loupe.frame .zoom-loupe-rim {
+  border-radius: 29.5px;
+}
+
+.zoom-loupe-rim-highlight {
+  position: absolute;
+  top: 8%;
+  left: 12%;
+  width: 28%;
+  height: 2.5px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0));
+  transform: rotate(-35deg);
+}
+
+/* Chromatic Aberration Fringe Ring */
+.zoom-loupe-chromatic {
+  position: absolute;
+  inset: 0;
+  box-shadow:
+    inset 3.5px 0 12px rgba(255, 45, 110, 0.35),
+    inset -3.5px 0 12px rgba(0, 210, 255, 0.35);
+  pointer-events: none;
+  mix-blend-mode: screen;
+}
+
+.zoom-loupe.lens .zoom-loupe-chromatic {
+  border-radius: 50%;
+}
+
+.zoom-loupe.pill .zoom-loupe-chromatic {
+  border-radius: 999px;
+}
+
+.zoom-loupe.frame .zoom-loupe-chromatic {
+  border-radius: 26px;
+}
+
+/* Curved Lens Glare Arc */
+.zoom-loupe-glare {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    circle at 35% 25%,
+    rgba(255, 255, 255, 0.22) 0%,
+    rgba(255, 255, 255, 0.06) 40%,
+    rgba(255, 255, 255, 0) 75%
+  );
+  pointer-events: none;
+}
+
+.zoom-loupe.lens .zoom-loupe-glare {
+  border-radius: 50%;
+}
+
+.zoom-loupe.pill .zoom-loupe-glare {
+  border-radius: 999px;
+}
+
+.zoom-loupe.frame .zoom-loupe-glare {
+  border-radius: 26px;
+}
+
+/* Morph Tag Pill at Bottom of Lens */
+.zoom-loupe-morph-tag {
+  position: absolute;
+  bottom: -32px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 12px;
+  border-radius: 999px;
+  background: rgba(18, 18, 22, 0.92);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  color: #faedf1;
+  font-family: 'Space Grotesk', -apple-system, sans-serif;
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  white-space: nowrap;
+  pointer-events: auto; /* Clickable */
+  cursor: pointer;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.6);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.zoom-loupe-morph-tag:hover {
+  background: rgba(30, 30, 38, 0.98);
+  border-color: rgba(250, 237, 241, 0.45);
+  transform: translateX(-50%) translateY(-2px);
+  box-shadow: 0 6px 22px rgba(250, 237, 241, 0.2);
+}
+
+.loupe-tag-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #faedf1;
+  box-shadow: 0 0 6px rgba(250, 237, 241, 0.8);
+}

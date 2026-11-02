@@ -813,12 +813,12 @@ export default function App() {
             backgroundColor: 'transparent'
           }}
         >
-          {/* Main Content Stage: Left Animated Paper Airplane + Right Apple Contact Typography */}
+          {/* Main Content Stage: Left Animated Dynamic Character + Right Apple Contact Typography */}
           <div className="contact-main-row">
             <div className="contact-airplane-col">
               <img
-                src="/man-flying-paper-airplane.svg"
-                alt="Man flying on paper airplane"
+                src={theme === 'light' ? '/happy-character-throwing-ball.svg' : '/man-flying-paper-airplane.svg'}
+                alt={theme === 'light' ? 'Happy character throwing ball' : 'Man flying on paper airplane'}
                 className="contact-airplane-svg"
               />
             </div>

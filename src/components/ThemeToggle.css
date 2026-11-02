@@ -4,8 +4,8 @@
 
 .theme-toggle-wrap {
   position: fixed;
-  top: 30px;
-  right: 36px;
+  top: 24px;
+  right: 28px;
   z-index: 50;
   transition: opacity 0.4s ease, transform 0.4s ease;
 }
@@ -22,7 +22,7 @@
 }
 
 .liquid-switch-wrapper {
-  font-size: 5.2px; /* Scales the 10em switch to a sleek 52px width x 26px height */
+  font-size: 4px; /* Perfectly balances a sleek 40px width x 20px height (standard touch-friendly micro switch) */
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -42,6 +42,7 @@
 
 /* User's exact Liquid-3 Switch CSS */
 .liquid-3 {
+  font-size: inherit !important;
   --primary: #000;
   --secondary: #fff;
   --time: 0.6s;

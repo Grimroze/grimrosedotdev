@@ -733,7 +733,7 @@ export default function App() {
                 <div className="about-folder-stage">
                   <Folder
                     label="GOLDI.SONI"
-                    color={theme === 'light' ? '#2563eb' : '#202025'}
+                    color={theme === 'light' ? '#18181b' : '#202025'}
                     theme={theme}
                     paperColor="#ffffff"
                     tabPosition="right"
@@ -835,10 +835,10 @@ export default function App() {
               energy={0.53}
               thickness={0.3}
               spread={1}
-              glow={0.1}
+              glow={theme === 'light' ? 0.25 : 0.1}
               taper={3}
-              intensity={1}
-              saturation={0.2}
+              intensity={theme === 'light' ? 1.3 : 1}
+              saturation={theme === 'light' ? 1.4 : 0.2}
               hueShift={0}
               colors={["#ff1a00", "#ff7b90", "#ffa24c", "#ffe0b3", "#ff1a00", "#3569fa", "#00d2eb"]}
             />

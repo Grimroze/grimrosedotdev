@@ -94,6 +94,7 @@ export const PORTFOLIO_KNOWLEDGE = [
     response: `**Get in Touch with Goldi Soni**:
 
 • **Email**: [grimissher@gmail.com](mailto:grimissher@gmail.com)
+• **Website**: [grimdotdev.vercel.app](https://grimdotdev.vercel.app/)
 • **LinkedIn**: [linkedin.com/in/goldi-soni](https://www.linkedin.com/in/goldi-soni/)
 • **GitHub**: [github.com/Grimroze](https://github.com/Grimroze)
 • **LeetCode**: [leetcode.com/u/grimrose](https://leetcode.com/u/grimrose/)

@@ -30,16 +30,29 @@ const NAV_ITEMS = [
   { label: 'Connect', href: '#contact' }
 ];
 
-const CONNECT_SVGS = [
+const DARK_SVGS = [
   {
     id: 'airplane',
     src: '/man-flying-paper-airplane.svg',
     alt: 'Man flying on paper airplane'
   },
   {
+    id: 'laptops',
+    src: '/man-work-from-home-laptops.svg',
+    alt: 'Man working with laptops'
+  }
+];
+
+const LIGHT_SVGS = [
+  {
     id: 'ball',
     src: '/happy-character-throwing-ball.svg',
     alt: 'Happy character throwing ball'
+  },
+  {
+    id: 'airplane',
+    src: '/man-flying-paper-airplane.svg',
+    alt: 'Man flying on paper airplane'
   },
   {
     id: 'laptops',
@@ -232,11 +245,21 @@ export default function App() {
     return 'dark';
   });
 
-  // Random animated SVG for Connect section on each reload
-  const [connectSvg] = useState(() => {
-    const randomIndex = Math.floor(Math.random() * CONNECT_SVGS.length);
-    return CONNECT_SVGS[randomIndex];
+  // Random animated SVG for Connect section on each reload:
+  // Dark mode strictly uses dark-compatible illustrations (Airplane, Laptops)
+  // Light mode uses artistic sketch ball throwing character, Airplane, or Laptops
+  const [connectSvg, setConnectSvg] = useState(() => {
+    const initialTheme = typeof window !== 'undefined' ? localStorage.getItem('portfolio-theme') || 'dark' : 'dark';
+    const pool = initialTheme === 'light' ? LIGHT_SVGS : DARK_SVGS;
+    return pool[Math.floor(Math.random() * pool.length)];
   });
+
+  // Guard: when switching to dark mode, ensure 'ball' SVG never displays
+  useEffect(() => {
+    if (theme === 'dark' && connectSvg.id === 'ball') {
+      setConnectSvg(DARK_SVGS[Math.floor(Math.random() * DARK_SVGS.length)]);
+    }
+  }, [theme, connectSvg.id]);
 
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', theme);

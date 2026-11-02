@@ -788,8 +788,8 @@ body, #root {
 }
 
 .contact-airplane-col {
-  flex: 1 1 48%;
-  max-width: 560px;
+  flex: 1 1 50%;
+  max-width: 640px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -807,9 +807,9 @@ body, #root {
   transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), filter 0.35s ease;
 }
 
-/* 1. Paper Airplane */
+/* 1. Paper Airplane (+15% larger) */
 .contact-svg-airplane {
-  max-width: clamp(340px, 32vw, 470px);
+  max-width: clamp(390px, 37vw, 540px);
   filter: drop-shadow(0 20px 48px rgba(255, 217, 40, 0.16)) drop-shadow(0 0 28px rgba(95, 122, 255, 0.14));
   animation: airplane-float 5s ease-in-out infinite alternate;
 }
@@ -818,9 +818,9 @@ body, #root {
   transform: translateY(-12px) scale(1.05) rotate(-1.5deg);
 }
 
-/* 2. Happy Ball Character */
+/* 2. Happy Ball Character (+15% larger) */
 .contact-svg-ball {
-  max-width: clamp(290px, 27vw, 400px);
+  max-width: clamp(335px, 31vw, 460px);
   filter: drop-shadow(0 20px 48px rgba(56, 189, 248, 0.18)) drop-shadow(0 0 28px rgba(168, 85, 247, 0.14));
   animation: character-float 4.5s ease-in-out infinite alternate;
 }
@@ -829,9 +829,9 @@ body, #root {
   transform: translateY(-12px) scale(1.06);
 }
 
-/* 3. Man Work From Home With Laptops */
+/* 3. Man Work From Home With Laptops (+15% larger) */
 .contact-svg-laptops {
-  max-width: clamp(310px, 29vw, 420px);
+  max-width: clamp(355px, 33vw, 485px);
   filter: drop-shadow(0 20px 48px rgba(244, 63, 94, 0.16)) drop-shadow(0 0 28px rgba(59, 130, 246, 0.14));
   animation: laptops-float 5.2s ease-in-out infinite alternate;
 }

@@ -14,7 +14,6 @@ import DocumentReader from './components/DocumentReader';
 import ProjectDeck from './components/ProjectDeck';
 import SitePreloader from './components/SitePreloader';
 import FoundationsArchive from './components/FoundationsArchive';
-import Strands from './components/Strands';
 import ConnectLoop from './components/ConnectLoop';
 import AiOrbTrigger from './components/AiOrbTrigger';
 import AiChatDrawer from './components/AiChatDrawer';
@@ -814,82 +813,62 @@ export default function App() {
             backgroundColor: 'transparent'
           }}
         >
-          {/* Full-Bleed Ambient Reactive Strands Canvas (No clipping, completely unboxed) */}
-          <div
-            style={{
-              position: 'absolute',
-              inset: 0,
-              width: '100%',
-              height: '100%',
-              pointerEvents: 'auto',
-              zIndex: 1,
-              overflow: 'visible'
-            }}
-          >
-            <Strands
-              glass={false}
-              count={3}
-              speed={2.25}
-              amplitude={0.5}
-              waviness={1}
-              energy={0.53}
-              thickness={0.3}
-              spread={1}
-              glow={theme === 'light' ? 0.25 : 0.1}
-              taper={3}
-              intensity={theme === 'light' ? 1.3 : 1}
-              saturation={theme === 'light' ? 1.4 : 0.2}
-              hueShift={0}
-              colors={["#ff1a00", "#ff7b90", "#ffa24c", "#ffe0b3", "#ff1a00", "#3569fa", "#00d2eb"]}
-            />
-          </div>
+          {/* Main Content Stage: Left Animated Paper Airplane + Right Apple Contact Typography */}
+          <div className="contact-main-row">
+            <div className="contact-airplane-col">
+              <img
+                src="/man-flying-paper-airplane.svg"
+                alt="Man flying on paper airplane"
+                className="contact-airplane-svg"
+              />
+            </div>
 
-          {/* Clean Minimal Apple Contact Layout (Zero Boxes, Zero Clutter) */}
-          <div className="apple-contact-wrap">
-            <h3 className="apple-siri-heading">
-              Talk to a human.
-              <span className="apple-siri-subline">While you still can.</span>
-            </h3>
+            <div className="apple-contact-wrap">
+              <h3 className="apple-siri-heading">
+                Talk to a human.
+                <span className="apple-siri-subline">While you still can.</span>
+              </h3>
 
-            {/* Subtle Text Social Links */}
-            <div className="contact-subtle-links">
-              <a
-                href="https://github.com/Grimroze"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="contact-subtle-link"
-              >
-                <span>GitHub</span>
-                <ArrowUpRight size={13} className="subtle-link-arrow" />
-              </a>
-              <span className="contact-subtle-sep">/</span>
-              <a
-                href="https://www.linkedin.com/in/goldi-soni/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="contact-subtle-link"
-              >
-                <span>LinkedIn</span>
-                <ArrowUpRight size={13} className="subtle-link-arrow" />
-              </a>
-              <span className="contact-subtle-sep">/</span>
-              <a
-                href="https://leetcode.com/u/grimrose/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="contact-subtle-link"
-              >
-                <span>LeetCode</span>
-                <ArrowUpRight size={13} className="subtle-link-arrow" />
-              </a>
-              <span className="contact-subtle-sep">/</span>
-              <a
-                href="mailto:grimissher@gmail.com"
-                className="contact-subtle-link"
-              >
-                <span>Email</span>
-                <ArrowUpRight size={13} className="subtle-link-arrow" />
-              </a>
+              {/* Subtle Text Social Links */}
+              <div className="contact-subtle-links">
+                <a
+                  href="https://github.com/Grimroze"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="contact-subtle-link"
+                >
+                  <span>GitHub</span>
+                  <ArrowUpRight size={13} className="subtle-link-arrow" />
+                </a>
+                <span className="contact-subtle-sep">/</span>
+                <a
+                  href="https://www.linkedin.com/in/goldi-soni/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="contact-subtle-link"
+                >
+                  <span>LinkedIn</span>
+                  <ArrowUpRight size={13} className="subtle-link-arrow" />
+                </a>
+                <span className="contact-subtle-sep">/</span>
+                <a
+                  href="https://leetcode.com/u/grimrose/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="contact-subtle-link"
+                >
+                  <span>LeetCode</span>
+                  <ArrowUpRight size={13} className="subtle-link-arrow" />
+                </a>
+                <span className="contact-subtle-sep">/</span>
+                <a
+                  href="mailto:grimissher@gmail.com"
+                  className="contact-subtle-link"
+                >
+                  <span>Email</span>
+                  <ArrowUpRight size={13} className="subtle-link-arrow" />
+                </a>
+              </div>
             </div>
           </div>
 

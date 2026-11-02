@@ -16,6 +16,14 @@
   height: var(--sl-size);
 }
 
+[data-theme="light"] .sling-button {
+  --sl-pad: #18181b;
+  --sl-icon: #f5f5f5;
+  --sl-accent: #18181b;
+  --sl-well: #e4e4e7;
+  --sl-band: #a1a1aa;
+}
+
 .sling-button__fx {
   position: absolute;
   top: 50%;

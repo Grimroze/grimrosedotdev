@@ -1,0 +1,113 @@
+/* ==========================================================================
+   ThemeToggle.css - Minimal Floating Ceramic / Obsidian Theme Switch
+   ========================================================================== */
+
+.theme-toggle-wrap {
+  position: fixed;
+  top: 30px;
+  right: 36px;
+  z-index: 50;
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.theme-toggle-wrap.is-pending {
+  opacity: 0;
+  transform: translateY(-8px);
+  pointer-events: none;
+}
+
+.theme-toggle-wrap.is-ready {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.theme-toggle-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2px;
+  width: 58px;
+  height: 32px;
+  padding: 3px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  cursor: pointer;
+  outline: none;
+  transition: background-color 0.25s ease, border-color 0.25s ease, transform 0.2s ease, box-shadow 0.2s ease;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.theme-toggle-btn:hover {
+  transform: scale(1.04);
+  border-color: rgba(255, 255, 255, 0.24);
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.4);
+}
+
+/* Moving Indicator Thumb */
+.theme-toggle-slider {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: #ffffff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.45);
+  transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.25s ease;
+  z-index: 1;
+}
+
+.theme-toggle-btn.is-light .theme-toggle-slider {
+  transform: translateX(26px);
+  background: #09090b;
+}
+
+.theme-toggle-icon-wrap {
+  position: relative;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  color: rgba(255, 255, 255, 0.45);
+  transition: color 0.25s ease;
+}
+
+/* Icon colors when thumb is behind them */
+.theme-toggle-btn.is-dark .theme-toggle-icon-wrap:first-of-type {
+  color: #060608;
+}
+
+.theme-toggle-btn.is-light .theme-toggle-icon-wrap:last-of-type {
+  color: #ffffff;
+}
+
+/* Light Theme Styling for Toggle Button */
+[data-theme="light"] .theme-toggle-btn {
+  background: rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+[data-theme="light"] .theme-toggle-btn:hover {
+  border-color: rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+}
+
+[data-theme="light"] .theme-toggle-icon-wrap {
+  color: rgba(0, 0, 0, 0.45);
+}
+
+@media (max-width: 640px) {
+  .theme-toggle-wrap {
+    top: 24px;
+    right: 20px;
+  }
+}

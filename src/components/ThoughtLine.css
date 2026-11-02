@@ -289,3 +289,59 @@
     animation-duration: 2.4s;
   }
 }
+
+/* ==========================================================================
+   ThoughtLine Light Theme Overrides
+   ========================================================================== */
+
+[data-theme="light"] .thought-line {
+  color: rgba(0, 0, 0, 0.7);
+}
+
+[data-theme="light"] .thought-line__dot {
+  background: #09090b;
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.3);
+}
+
+[data-theme="light"] .thought-line__text--done[data-active] {
+  color: rgba(0, 0, 0, 0.5);
+}
+
+[data-theme="light"] .thought-line[data-working] .thought-line__breath[data-shimmer] {
+  background: linear-gradient(
+    100deg,
+    rgba(0, 0, 0, 0.4) 20%,
+    rgba(0, 0, 0, 0.95) 50%,
+    rgba(0, 0, 0, 0.4) 80%
+  );
+  background-size: 250% 100%;
+  background-position: 125% 0;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+}
+
+[data-theme="light"] .thought-line__timer {
+  color: rgba(0, 0, 0, 0.45);
+}
+
+[data-theme="light"] .thought-line__chevron {
+  color: rgba(0, 0, 0, 0.45);
+}
+
+[data-theme="light"] .thought-line__steps {
+  color: rgba(0, 0, 0, 0.65);
+}
+
+[data-theme="light"] .thought-line__mark {
+  color: #09090b;
+}
+
+[data-theme="light"] .thought-line__pulse {
+  background: rgba(0, 0, 0, 0.85);
+}
+
+[data-theme="light"] .thought-line__step[data-done] .thought-line__step-text {
+  color: rgba(0, 0, 0, 0.4);
+}

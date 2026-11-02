@@ -18,6 +18,7 @@ import Strands from './components/Strands';
 import ConnectLoop from './components/ConnectLoop';
 import AiOrbTrigger from './components/AiOrbTrigger';
 import AiChatDrawer from './components/AiChatDrawer';
+import ThemeToggle from './components/ThemeToggle';
 import { ArrowDown, ArrowUpRight, ArrowDownRight, X, Mail, FileText, Terminal } from 'lucide-react';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -207,6 +208,21 @@ export default function App() {
   const [heroReady, setHeroReady] = useState(false);
   const [isWorkInView, setIsWorkInView] = useState(false);
   const [isAiOpen, setIsAiOpen] = useState(false);
+  const [theme, setTheme] = useState(() => {
+    if (typeof window !== 'undefined') {
+      return localStorage.getItem('portfolio-theme') || 'dark';
+    }
+    return 'dark';
+  });
+
+  useEffect(() => {
+    document.documentElement.setAttribute('data-theme', theme);
+    localStorage.setItem('portfolio-theme', theme);
+  }, [theme]);
+
+  const toggleTheme = useCallback(() => {
+    setTheme(prev => (prev === 'dark' ? 'light' : 'dark'));
+  }, []);
 
   // Prevent scroll during initial preloader sequence, when reading a document modal, or when AI drawer is open
   useEffect(() => {
@@ -428,7 +444,7 @@ export default function App() {
   };
 
   return (
-    <div style={{ position: 'relative', width: '100%', minHeight: '100vh', backgroundColor: '#000000' }}>
+    <div style={{ position: 'relative', width: '100%', minHeight: '100vh', backgroundColor: theme === 'light' ? '#f8f8f9' : '#000000', transition: 'background-color 0.35s ease' }}>
       {/* 0. Neural Super-Resolution CNN Preloader */}
       {showPreloader && (
         <SitePreloader
@@ -486,18 +502,26 @@ export default function App() {
         }}
       >
         <Waves
-          lineColor="#ffffff"
-          backgroundColor="#000000"
+          lineColor={theme === 'light' ? '#18181b' : '#ffffff'}
+          backgroundColor={theme === 'light' ? '#f8f8f9' : '#000000'}
+          lightMode={theme === 'light'}
           amplitude={32}
           speed={1}
           spacing={10}
-          lineWidth={1}
+          lineWidth={theme === 'light' ? 0.75 : 1}
           mouseInteraction={true}
           mouseRadius={175}
           mouseStrength={1}
           clickRipple={true}
         />
       </div>
+
+      {/* Floating Ceramic / Obsidian Theme Toggle */}
+      <ThemeToggle
+        theme={theme}
+        onToggle={toggleTheme}
+        ready={!showPreloader && heroReady}
+      />
 
       {/* 2. Floating Navigation with Minimal Pastel Dot Toggle */}
       <div className={`nav-cinematic-enter nav-master-dock ${heroReady ? 'dock-enter' : 'dock-pending'}`}>
@@ -517,9 +541,9 @@ export default function App() {
             items={NAV_ITEMS}
             activeIndex={activeNavIndex}
             initialActiveIndex={0}
-            theme="dark"
+            theme={theme}
             size="sm"
-            color="#faedf1"
+            color={theme === 'light' ? '#18181b' : '#faedf1'}
             frame={true}
             particleCount={32}
             spread={100}

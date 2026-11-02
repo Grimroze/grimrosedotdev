@@ -571,3 +571,116 @@
     padding: 12px 16px;
   }
 }
+
+/* ==========================================================================
+   CardSwap Light Theme Overrides
+   ========================================================================== */
+
+[data-theme="light"] .proj-swap-card {
+  background: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.95), 0 20px 50px rgba(0, 0, 0, 0.08);
+  color: #09090b;
+}
+
+[data-theme="light"] .proj-swap-card::before {
+  background-image:
+    linear-gradient(rgba(0, 0, 0, 0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 0, 0, 0.025) 1px, transparent 1px);
+}
+
+[data-theme="light"] .proj-mac-topbar {
+  background: rgba(0, 0, 0, 0.02);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.07);
+}
+
+[data-theme="light"] .proj-mac-prefix {
+  color: rgba(0, 0, 0, 0.4);
+}
+
+[data-theme="light"] .proj-mac-slug {
+  color: #09090b;
+}
+
+[data-theme="light"] .proj-action-btn {
+  background: rgba(0, 0, 0, 0.04);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  color: rgba(0, 0, 0, 0.85);
+}
+
+[data-theme="light"] .proj-action-btn:hover {
+  background: rgba(0, 0, 0, 0.08);
+  border-color: rgba(0, 0, 0, 0.2);
+  color: #000000;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
+}
+
+[data-theme="light"] .proj-card-title {
+  color: #09090b;
+}
+
+[data-theme="light"] .proj-card-subtitle {
+  color: #18181b;
+}
+
+[data-theme="light"] .proj-card-desc {
+  color: rgba(0, 0, 0, 0.65);
+}
+
+[data-theme="light"] .proj-card-metrics {
+  background: rgba(0, 0, 0, 0.03);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+[data-theme="light"] .proj-metrics-header {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+[data-theme="light"] .proj-metrics-tag {
+  color: rgba(0, 0, 0, 0.45);
+}
+
+[data-theme="light"] .proj-metric-dot {
+  background: #09090b;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
+}
+
+[data-theme="light"] .proj-metric-label {
+  color: rgba(0, 0, 0, 0.5);
+}
+
+[data-theme="light"] .proj-metric-value {
+  color: #09090b;
+}
+
+[data-theme="light"] .proj-card-footer {
+  border-top: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+[data-theme="light"] .proj-tech-pill {
+  color: rgba(0, 0, 0, 0.7);
+  background: rgba(0, 0, 0, 0.04);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+[data-theme="light"] .work-side-title {
+  color: rgba(0, 0, 0, 0.45);
+}
+
+[data-theme="light"] .work-side-counter {
+  color: #09090b;
+}
+
+[data-theme="light"] .work-side-github-link {
+  color: rgba(0, 0, 0, 0.75);
+  text-decoration-color: rgba(0, 0, 0, 0.25);
+}
+
+[data-theme="light"] .work-side-github-link:hover {
+  color: #000000;
+  text-decoration-color: #000000;
+}
+
+[data-theme="light"] .work-side-github-sub {
+  color: rgba(0, 0, 0, 0.4);
+}

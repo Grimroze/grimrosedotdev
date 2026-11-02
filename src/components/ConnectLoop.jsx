@@ -65,11 +65,11 @@ export default function ConnectLoop() {
     <div className="contact-loop-wrapper">
       <LogoLoop
         logos={TECH_STACK_LOGOS}
-        speed={52}
-        hoverSpeed={18}
+        speed={48}
+        hoverSpeed={16}
         direction="left"
-        logoHeight={62}
-        gap={64}
+        logoHeight={56}
+        gap={52}
         fadeOut={true}
         fadeOutWidth={0.16}
         scaleOnHover={true}

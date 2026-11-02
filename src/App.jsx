@@ -30,6 +30,24 @@ const NAV_ITEMS = [
   { label: 'Connect', href: '#contact' }
 ];
 
+const CONNECT_SVGS = [
+  {
+    id: 'airplane',
+    src: '/man-flying-paper-airplane.svg',
+    alt: 'Man flying on paper airplane'
+  },
+  {
+    id: 'ball',
+    src: '/happy-character-throwing-ball.svg',
+    alt: 'Happy character throwing ball'
+  },
+  {
+    id: 'laptops',
+    src: '/man-work-from-home-laptops.svg',
+    alt: 'Man working with laptops'
+  }
+];
+
 const STATEMENT_HIGHLIGHTS = [
   { phrase: 'AI', style: 'spinner' },
   { phrase: 'black coffee', style: 'underline' },
@@ -212,6 +230,12 @@ export default function App() {
       return localStorage.getItem('portfolio-theme') || 'dark';
     }
     return 'dark';
+  });
+
+  // Random animated SVG for Connect section on each reload
+  const [connectSvg] = useState(() => {
+    const randomIndex = Math.floor(Math.random() * CONNECT_SVGS.length);
+    return CONNECT_SVGS[randomIndex];
   });
 
   useEffect(() => {
@@ -795,7 +819,7 @@ export default function App() {
         {/* Section 3.1: Foundations & Experiment Archive (Interactive 3-Column Shredder) */}
         <FoundationsArchive />
 
-        {/* Section 4: Contact Section (Strands takes center stage as the King) */}
+        {/* Section 4: Contact Section */}
         <section
           ref={contactRef}
           id="contact"
@@ -805,21 +829,22 @@ export default function App() {
             width: '100%',
             display: 'flex',
             flexDirection: 'column',
-            justifyContent: 'center',
+            justifyContent: 'space-between',
             alignItems: 'stretch',
             textAlign: 'right',
-            padding: 'clamp(90px, 12vh, 140px) 0 clamp(60px, 8vh, 100px) 0',
+            padding: 'clamp(72px, 8vh, 96px) 0 clamp(20px, 3vh, 36px) 0',
             overflow: 'visible',
-            backgroundColor: 'transparent'
+            backgroundColor: 'transparent',
+            boxSizing: 'border-box'
           }}
         >
           {/* Main Content Stage: Left Animated Dynamic Character + Right Apple Contact Typography */}
           <div className="contact-main-row">
             <div className="contact-airplane-col">
               <img
-                src={theme === 'light' ? '/happy-character-throwing-ball.svg' : '/man-flying-paper-airplane.svg'}
-                alt={theme === 'light' ? 'Happy character throwing ball' : 'Man flying on paper airplane'}
-                className="contact-airplane-svg"
+                src={connectSvg.src}
+                alt={connectSvg.alt}
+                className={`contact-airplane-svg contact-svg-${connectSvg.id}`}
               />
             </div>
 

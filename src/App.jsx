@@ -700,6 +700,12 @@ export default function App() {
             <div className="about-split-stage">
               {/* Left Column: Solo Metallic Stippled Face (Floating naturally without window/background) */}
               <div className="about-face-standalone">
+                <img
+                  src="/metallic-head-silhouette.png"
+                  alt=""
+                  className="about-face-silhouette-underlay"
+                  aria-hidden="true"
+                />
                 <DitherVeil
                   src="/metallic-head.jpg"
                   fit="contain"

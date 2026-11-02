@@ -109,3 +109,27 @@
 .proximity-space {
   display: inline-block;
 }
+
+/* Light Theme: Deep Carbon Ink & High Contrast for Hero Quote */
+[data-theme="light"] .scroll-reveal-text {
+  color: #09090b !important;
+  -webkit-text-stroke: 0.55px rgba(9, 9, 11, 0.9);
+  text-shadow: none;
+}
+
+[data-theme="light"] .font-spinner-word {
+  color: #09090b;
+}
+
+[data-theme="light"] .font-spinner-word.is-spinning {
+  text-shadow: 0 0 20px rgba(0, 0, 0, 0.25);
+}
+
+[data-theme="light"] .scroll-reveal-word.highlight-underline {
+  color: #09090b;
+}
+
+[data-theme="light"] .scroll-reveal-word.highlight-underline::after {
+  background: linear-gradient(90deg, #18181b 0%, rgba(24, 24, 27, 0.35) 100%);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
+}

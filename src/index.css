@@ -409,12 +409,13 @@ body, #root {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: transparent !important;
-  border: none !important;
-  box-shadow: none !important;
+  background: transparent;
+  border: none;
+  box-shadow: none;
   overflow: visible;
   user-select: none;
   cursor: grab;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .about-face-standalone:active {
@@ -1034,6 +1035,18 @@ body, #root {
 
 [data-theme="light"] .about-section-subtitle {
   color: rgba(0, 0, 0, 0.62);
+}
+
+/* Light Theme: Luxury Obsidian Showcase Container for Metallic Head */
+[data-theme="light"] .about-face-standalone {
+  background: radial-gradient(circle at 50% 45%, #181820 0%, #0c0c10 100%);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 28px;
+  box-shadow: 0 20px 50px -15px rgba(0, 0, 0, 0.16), inset 0 1px 1px rgba(255, 255, 255, 0.08);
+  max-width: 580px;
+  height: clamp(560px, 70vh, 700px);
+  padding: 16px;
+  margin: 0 auto;
 }
 
 [data-theme="light"] .statement-highlight.underline {

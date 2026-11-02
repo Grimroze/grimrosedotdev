@@ -651,9 +651,9 @@ export default function App() {
               mode="scrub"
               enableBlur={true}
               blurStrength={6}
-              baseOpacity={0.12}
+              baseOpacity={theme === 'light' ? 0.22 : 0.12}
               stagger={0.06}
-              highlightColor="#faedf1"
+              highlightColor={theme === 'light' ? '#09090b' : '#faedf1'}
             >
               Sometimes I wonder how AI is going to make my morning black coffee... well, guess I should probably fine-tune a model for that too. Until then, I spend my hours taming loss curves, optimizing weights, and building intelligent systems that hallucinate a little less and solve real problems a little more.
             </ScrollReveal>

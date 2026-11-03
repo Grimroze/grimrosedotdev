@@ -6,12 +6,12 @@
 .scroll-reveal-text {
   display: block;
   font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
-  font-size: clamp(38px, 5.2vw, 72px);
-  line-height: 1.24;
+  font-size: clamp(32px, 4.4vw, 61px); /* Exactly 15% smaller */
+  line-height: 1.28;
   font-weight: 700;
-  -webkit-text-stroke: 0.55px currentColor;
+  -webkit-text-stroke: 0.4px currentColor;
   text-shadow: 0 0 1px rgba(255, 255, 255, 0.35);
-  letter-spacing: -0.035em;
+  letter-spacing: -0.03em;
   color: #ffffff;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -21,6 +21,17 @@
   display: inline-block;
   white-space: nowrap;
   vertical-align: baseline;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), font-family 0.15s ease;
+}
+
+.random-font-word {
+  cursor: pointer;
+  user-select: none;
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.2s ease;
+}
+
+.random-font-word:hover {
+  transform: translateY(-1px) scale(1.03);
 }
 
 /* Font Spinner / Roulette Slot Machine for AI */

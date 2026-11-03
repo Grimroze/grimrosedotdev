@@ -16,6 +16,7 @@ import SitePreloader from './components/SitePreloader';
 import FoundationsArchive from './components/FoundationsArchive';
 import ConnectLoop from './components/ConnectLoop';
 import SonicVault from './components/SonicVault';
+import Footer from './components/Footer';
 import AiOrbTrigger from './components/AiOrbTrigger';
 import AiChatDrawer from './components/AiChatDrawer';
 import ThemeToggle from './components/ThemeToggle';
@@ -589,6 +590,7 @@ export default function App() {
             items={NAV_ITEMS}
             activeIndex={activeNavIndex}
             initialActiveIndex={0}
+            isOpen={isNavOpen}
             theme={theme}
             size="sm"
             color={theme === 'light' ? '#18181b' : '#faedf1'}
@@ -928,6 +930,9 @@ export default function App() {
 
         {/* Easter Egg Section: The Sonic Vault (Multiple Physical TearTickets) */}
         <SonicVault theme={theme} />
+
+        {/* Minimalist Architectural Colophon Footer */}
+        <Footer theme={theme} />
       </div>
     </div>
   );

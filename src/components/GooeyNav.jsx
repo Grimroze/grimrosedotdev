@@ -206,6 +206,7 @@ const GooeyNav = ({
   items = DEFAULT_ITEMS,
   initialActiveIndex = 0,
   activeIndex,
+  isOpen = true,
   onChange,
   theme = 'dark',
   color,
@@ -286,10 +287,17 @@ const GooeyNav = ({
     let disposed = false;
 
     const measure = () => {
+      if (disposed) return;
       const box = stage.getBoundingClientRect();
       const ratio = Math.min(window.devicePixelRatio || 1, 2);
       const boxWidth = stage.offsetWidth || stage.clientWidth || box.width;
       const boxHeight = stage.offsetHeight || stage.clientHeight || box.height;
+
+      // Guard: Never corrupt measured geometry when navbar is collapsed or animating closed
+      if (!boxWidth || boxWidth < 60 || !boxHeight || boxHeight < 15) {
+        return;
+      }
+
       view.width = boxWidth;
       view.height = boxHeight;
       const outerWidth = boxWidth + MARGIN * 2;
@@ -306,7 +314,7 @@ const GooeyNav = ({
         canvas.width = width;
         canvas.height = height;
       }
-      rects = Array.from(list.children).map(item => {
+      const measuredRects = Array.from(list.children).map(item => {
         if (item.offsetLeft !== undefined && item.offsetWidth > 0) {
           return {
             x: item.offsetLeft,
@@ -318,6 +326,11 @@ const GooeyNav = ({
         const rect = item.getBoundingClientRect();
         return { x: rect.left - box.left, y: rect.top - box.top, w: rect.width, h: rect.height };
       });
+
+      // Only update rects if child items have non-zero dimensions
+      if (measuredRects.length > 0 && measuredRects[0].w > 0) {
+        rects = measuredRects;
+      }
     };
 
     const trace = (boxes, blobs, smooth) => {
@@ -721,6 +734,10 @@ const GooeyNav = ({
 
     engineRef.current = {
       go: index => go(index, true),
+      remargin: () => {
+        measure();
+        settle(indexRef.current);
+      },
       refresh: () => {
         render();
         wake();
@@ -744,6 +761,17 @@ const GooeyNav = ({
   useEffect(() => {
     engineRef.current?.go(current);
   }, [current]);
+
+  useEffect(() => {
+    if (isOpen) {
+      const t1 = setTimeout(() => engineRef.current?.remargin(), 60);
+      const t2 = setTimeout(() => engineRef.current?.remargin(), 400);
+      return () => {
+        clearTimeout(t1);
+        clearTimeout(t2);
+      };
+    }
+  }, [isOpen]);
 
   useEffect(() => {
     engineRef.current?.refresh();

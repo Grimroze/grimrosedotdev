@@ -1,0 +1,314 @@
+/* ---- Footer.css: Minimalist Architectural Colophon ---- */
+.site-colophon-footer {
+  position: relative;
+  width: 100%;
+  background: transparent;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  padding: clamp(48px, 6vh, 64px) 24px clamp(36px, 4vh, 48px);
+  box-sizing: border-box;
+  z-index: 10;
+  transition: border-color 0.3s ease;
+}
+
+.footer-inner-container {
+  width: 100%;
+  max-width: 1240px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(36px, 5vh, 48px);
+}
+
+/* Main Architectural Grid */
+.footer-main-row {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1.2fr 1.4fr 1fr;
+  gap: clamp(24px, 4vw, 48px);
+  align-items: start;
+}
+
+@media (max-width: 860px) {
+  .footer-main-row {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+}
+
+.footer-col {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* Col 1: Identity */
+.footer-brand-title {
+  font-family: 'Syne', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #ffffff;
+}
+
+.footer-brand-sub {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1.45;
+  color: rgba(255, 255, 255, 0.48);
+}
+
+.footer-status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 8px;
+  font-family: 'Space Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.02em;
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.footer-status-dot {
+  width: 6.5px;
+  height: 6.5px;
+  border-radius: 50%;
+  background: #10b981;
+  box-shadow: 0 0 8px rgba(16, 185, 129, 0.5);
+  animation: footerDotPulse 2.4s ease-in-out infinite;
+}
+
+@keyframes footerDotPulse {
+  0%, 100% {
+    opacity: 0.6;
+    transform: scale(0.9);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.15);
+  }
+}
+
+/* Col 2: Editorial Philosophy */
+.footer-col-quote {
+  padding: 0 12px;
+}
+
+@media (max-width: 860px) {
+  .footer-col-quote {
+    padding: 0;
+  }
+}
+
+.footer-philosophy-quote {
+  margin: 0;
+  font-family: 'Instrument Serif', Georgia, serif;
+  font-style: italic;
+  font-size: clamp(17px, 1.4vw, 20px);
+  line-height: 1.4;
+  color: rgba(255, 255, 255, 0.78);
+  letter-spacing: -0.01em;
+}
+
+.footer-philosophy-author {
+  display: block;
+  margin-top: 6px;
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.32);
+}
+
+/* Col 3: Signals Links */
+.footer-col-links {
+  align-items: flex-start;
+}
+
+@media (min-width: 861px) {
+  .footer-col-links {
+    align-items: flex-end;
+  }
+}
+
+.footer-links-heading {
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.35);
+  margin-bottom: 4px;
+}
+
+.footer-links-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+@media (min-width: 861px) {
+  .footer-links-grid {
+    align-items: flex-end;
+  }
+}
+
+.footer-nav-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 12.5px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.65);
+  text-decoration: none;
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.footer-nav-link:hover {
+  color: #ffffff;
+  transform: translateX(-1px);
+}
+
+.footer-link-icon {
+  opacity: 0.5;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.footer-nav-link:hover .footer-link-icon {
+  opacity: 1;
+  transform: translate(1px, -1px);
+}
+
+/* Bottom Colophon Hairline */
+.footer-bottom-bar {
+  width: 100%;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  padding-top: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+  box-sizing: border-box;
+}
+
+.footer-legal {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.06em;
+  color: rgba(255, 255, 255, 0.35);
+}
+
+.footer-legal-sep {
+  opacity: 0.4;
+}
+
+.footer-stack-tag {
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  color: rgba(255, 255, 255, 0.28);
+}
+
+@media (max-width: 720px) {
+  .footer-stack-tag {
+    display: none;
+  }
+}
+
+.footer-top-btn {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 999px;
+  padding: 5px 12px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: 'Space Mono', monospace;
+  font-size: 10.5px;
+  letter-spacing: 0.04em;
+  color: rgba(255, 255, 255, 0.6);
+  cursor: pointer;
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+.footer-top-btn:hover {
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.04);
+  transform: translateY(-1px);
+}
+
+.footer-top-icon {
+  transition: transform 0.2s ease;
+}
+
+.footer-top-btn:hover .footer-top-icon {
+  transform: translateY(-2px);
+}
+
+/* Light Theme Overrides */
+[data-theme="light"].site-colophon-footer,
+.site-colophon-footer[data-theme="light"] {
+  border-top-color: rgba(0, 0, 0, 0.08);
+}
+
+[data-theme="light"] .footer-brand-title {
+  color: #09090b;
+}
+
+[data-theme="light"] .footer-brand-sub {
+  color: rgba(9, 9, 11, 0.55);
+}
+
+[data-theme="light"] .footer-status-pill {
+  color: rgba(9, 9, 11, 0.6);
+}
+
+[data-theme="light"] .footer-philosophy-quote {
+  color: rgba(9, 9, 11, 0.85);
+}
+
+[data-theme="light"] .footer-philosophy-author {
+  color: rgba(9, 9, 11, 0.4);
+}
+
+[data-theme="light"] .footer-links-heading {
+  color: rgba(9, 9, 11, 0.4);
+}
+
+[data-theme="light"] .footer-nav-link {
+  color: rgba(9, 9, 11, 0.7);
+}
+
+[data-theme="light"] .footer-nav-link:hover {
+  color: #09090b;
+}
+
+[data-theme="light"] .footer-bottom-bar {
+  border-top-color: rgba(0, 0, 0, 0.05);
+}
+
+[data-theme="light"] .footer-legal {
+  color: rgba(9, 9, 11, 0.45);
+}
+
+[data-theme="light"] .footer-stack-tag {
+  color: rgba(9, 9, 11, 0.35);
+}
+
+[data-theme="light"] .footer-top-btn {
+  border-color: rgba(0, 0, 0, 0.14);
+  color: rgba(9, 9, 11, 0.7);
+}
+
+[data-theme="light"] .footer-top-btn:hover {
+  color: #000000;
+  border-color: rgba(0, 0, 0, 0.4);
+  background: rgba(0, 0, 0, 0.04);
+}

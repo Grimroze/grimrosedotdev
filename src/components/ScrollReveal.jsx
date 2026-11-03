@@ -22,6 +22,66 @@ const strengthAt = (distance, radius) => {
   return (Math.exp(-2.2 * (distance / radius) ** 2) - GAUSSIAN_EDGE) / (1 - GAUSSIAN_EDGE);
 };
 
+// Curated Typographic Palette for Word-by-Word Randomization
+const WORD_FONT_PRESETS = [
+  { name: 'Space Grotesk', family: "'Space Grotesk', -apple-system, sans-serif", style: 'normal', weight: 700, scale: 1 },
+  { name: 'Instrument Serif', family: "'Instrument Serif', Georgia, serif", style: 'italic', weight: 400, scale: 1.14 },
+  { name: 'Syne', family: "'Syne', sans-serif", style: 'normal', weight: 800, scale: 1 },
+  { name: 'Newsreader', family: "'Newsreader', Georgia, serif", style: 'italic', weight: 400, scale: 1.08 },
+  { name: 'Space Mono', family: "'Space Mono', monospace", style: 'normal', weight: 700, scale: 0.92 },
+  { name: 'Playfair Display', family: "'Playfair Display', Georgia, serif", style: 'italic', weight: 700, scale: 1.06 },
+  { name: 'Cinzel', family: "'Cinzel', serif", style: 'normal', weight: 700, scale: 0.96 }
+];
+
+// Sub-Component for Word with Randomized Font Personality & Interactive Morph
+const RandomFontWord = ({
+  token,
+  tokenIndex,
+  charStart,
+  letterRefs,
+  highlightClass,
+  initialFontIndex = 0
+}) => {
+  const [fontIndex, setFontIndex] = useState(initialFontIndex);
+
+  const cycleFont = useCallback(() => {
+    setFontIndex(prev => (prev + 1) % WORD_FONT_PRESETS.length);
+  }, []);
+
+  const currentFont = WORD_FONT_PRESETS[fontIndex] || WORD_FONT_PRESETS[0];
+
+  return (
+    <span
+      className={`scroll-reveal-word ${highlightClass} random-font-word`.trim()}
+      onClick={cycleFont}
+      onMouseEnter={cycleFont}
+      style={{
+        fontFamily: currentFont.family,
+        fontStyle: currentFont.style,
+        fontWeight: currentFont.weight,
+        fontSize: `${(currentFont.scale || 1) * 100}%`,
+        display: 'inline-block'
+      }}
+      title={`Font: ${currentFont.name} (Hover or click to change)`}
+    >
+      {token.text.split('').map((char, charIndex) => {
+        const letterIdx = charStart + charIndex;
+        return (
+          <span
+            key={charIndex}
+            ref={el => {
+              if (letterRefs.current) letterRefs.current[letterIdx] = el;
+            }}
+            className="proximity-letter"
+          >
+            {char}
+          </span>
+        );
+      })}
+    </span>
+  );
+};
+
 // 7 Distinct Font Personalities for "AI"
 const FONT_ROULETTE = [
   { name: 'Space Grotesk', family: "'Space Grotesk', sans-serif", style: 'normal', weight: 700, scale: 1 },
@@ -392,6 +452,14 @@ const ScrollReveal = ({
     };
   }, [enableProximity, proximityRadius, proximityScale, proximityLift, proximitySmoothing, rawText]);
 
+  const [randomSeed] = useState(() => Math.floor(Math.random() * WORD_FONT_PRESETS.length));
+
+  const fontAssignments = useMemo(() => {
+    return tokens.map((token, idx) => {
+      return (randomSeed + idx * 3 + token.text.length * 2 + (token.text.charCodeAt(0) || 0)) % WORD_FONT_PRESETS.length;
+    });
+  }, [tokens, randomSeed]);
+
   let globalCharIndex = 0;
 
   return (
@@ -404,14 +472,13 @@ const ScrollReveal = ({
 
           if (isAiSpinner) {
             return (
-              <span key={tokenIndex} style={{ display: 'inline-block', whiteSpace: 'nowrap' }}>
+              <span key={tokenIndex} style={{ display: 'inline-block', whiteSpace: 'nowrap', marginRight: '0.38em' }}>
                 <AiFontSpinner
                   word={token.text}
                   charStartIndex={charStart}
                   letterRefs={letterRefs}
                   triggerRef={aiSpinRef}
                 />
-                {tokenIndex < tokens.length - 1 && <span className="proximity-space">&nbsp;</span>}
               </span>
             );
           }
@@ -422,24 +489,15 @@ const ScrollReveal = ({
           else if (token.highlight === 'accent') highlightClass = 'highlight-accent';
 
           return (
-            <span key={tokenIndex} style={{ display: 'inline-block', whiteSpace: 'nowrap' }}>
-              <span className={`scroll-reveal-word ${highlightClass}`.trim()}>
-                {token.text.split('').map((char, charIndex) => {
-                  const letterIdx = charStart + charIndex;
-                  return (
-                    <span
-                      key={charIndex}
-                      ref={el => {
-                        if (letterRefs.current) letterRefs.current[letterIdx] = el;
-                      }}
-                      className="proximity-letter"
-                    >
-                      {char}
-                    </span>
-                  );
-                })}
-              </span>
-              {tokenIndex < tokens.length - 1 && <span className="proximity-space">&nbsp;</span>}
+            <span key={tokenIndex} style={{ display: 'inline-block', whiteSpace: 'nowrap', marginRight: '0.38em' }}>
+              <RandomFontWord
+                token={token}
+                tokenIndex={tokenIndex}
+                charStart={charStart}
+                letterRefs={letterRefs}
+                highlightClass={highlightClass}
+                initialFontIndex={fontAssignments[tokenIndex] || 0}
+              />
             </span>
           );
         })}

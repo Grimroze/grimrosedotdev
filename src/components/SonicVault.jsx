@@ -17,28 +17,28 @@ const PLAYLISTS = [
     spotifyUrl: 'https://open.spotify.com/playlist/64IWRoJTxIvA55ckPfFKL1'
   },
   {
-    id: 'knight-flow',
-    title: 'Flow State // Rigor',
+    id: 'soft-dihh',
+    title: 'Soft dihh 🧚',
     curator: 'GRIM',
-    stats: 'Coding Trance',
-    image: '/playlists/knight-flow.svg',
-    imageAlt: 'Flow State Playlist Cover Art',
+    stats: '112 Tracks',
+    image: '/playlists/soft-dihh.jpg',
+    imageAlt: 'Soft dihh Playlist Cover Art',
     rotate: 0.5,
     accentColor: '#38bdf8',
-    spotifyId: '37i9dQZF1DWWQRwui0ExPn',
-    spotifyUrl: 'https://open.spotify.com/playlist/37i9dQZF1DWWQRwui0ExPn'
+    spotifyId: '1qaSzyjW2q7aVzjvZugV7d',
+    spotifyUrl: 'https://open.spotify.com/playlist/1qaSzyjW2q7aVzjvZugV7d'
   },
   {
-    id: 'latent-space',
-    title: 'Latent Space Drift',
+    id: 'hole-in-the-sky',
+    title: 'A hole in the sky',
     curator: 'GRIM',
-    stats: 'Deep Focus',
-    image: '/playlists/latent-drift.svg',
-    imageAlt: 'Latent Space Drift Cover Art',
+    stats: '79 Tracks',
+    image: '/playlists/hole-in-the-sky.jpg',
+    imageAlt: 'A hole in the sky Playlist Cover Art',
     rotate: 2.0,
-    accentColor: '#c084fc',
-    spotifyId: '37i9dQZF1DXdLEN7aqioXM',
-    spotifyUrl: 'https://open.spotify.com/playlist/37i9dQZF1DXdLEN7aqioXM'
+    accentColor: '#f59e0b',
+    spotifyId: '3hNEaKixWENyGYeshCObBU',
+    spotifyUrl: 'https://open.spotify.com/playlist/3hNEaKixWENyGYeshCObBU'
   }
 ];
 

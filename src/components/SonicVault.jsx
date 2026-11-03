@@ -1,65 +1,64 @@
 import React, { useState, useCallback } from 'react';
 import TearTicket from './TearTicket';
-import { ExternalLink, RotateCcw, Music, Sparkles, Disc } from 'lucide-react';
+import { ExternalLink, RotateCcw } from 'lucide-react';
 import './SonicVault.css';
 
 const PLAYLISTS = [
   {
-    id: 'latent-space',
-    tag: '01 // NEURAL FREQUENCIES',
-    title: 'Latent Space Drift',
-    vibe: 'Speculative Decoding & 3 AM Multi-Agent Topology',
-    genre: 'Cyber Downtempo • Minimal Tech',
-    stats: '142 Tracks • Deep Focus',
-    image: '/playlists/latent-drift.svg',
-    imageAlt: 'Latent Space Drift Cover Art',
-    rotate: -1.8,
+    id: 'heart-cramps',
+    title: 'Heart cramps',
+    vibe: 'Late night melancholy & acoustic reverie',
+    genre: 'Melancholy • Indie • Acoustic',
+    stats: 'Curated by Goldi',
+    image: '/playlists/urdu-coffee.svg',
+    imageAlt: 'Heart cramps Cover Art',
+    rotate: -1.6,
     stubAdmit: 'ADMIT 01',
-    stubAction: 'RIP TO STREAM',
+    stubAction: 'RIP TO PLAY',
     stubNumber: 'NO. 001429',
-    accentColor: '#38bdf8',
-    spotifyUrl: 'https://open.spotify.com/playlist/37i9dQZF1DXdLEN7aqioXM'
+    accentColor: '#fb7185',
+    spotifyId: '64IWRoJTxIvA55ckPfFKL1',
+    spotifyUrl: 'https://open.spotify.com/playlist/64IWRoJTxIvA55ckPfFKL1'
   },
   {
     id: 'knight-flow',
-    tag: '02 // HIGH CADENCE RIGOR',
     title: 'LeetCode Knight // Flow',
     vibe: 'Sub-15ms Dynamic Programming & High-Octane Rush',
     genre: 'Phonk • Dark Synth • 160 BPM',
     stats: '98 Tracks • Speed Run',
     image: '/playlists/knight-flow.svg',
     imageAlt: 'LeetCode Knight Flow Cover Art',
-    rotate: 0.6,
+    rotate: 0.5,
     stubAdmit: 'ADMIT 02',
     stubAction: 'TEAR FOR SPEED',
     stubNumber: 'NO. 008921',
-    accentColor: '#fb7185',
+    accentColor: '#38bdf8',
+    spotifyId: '37i9dQZF1DX11gh2tH1b8e',
     spotifyUrl: 'https://open.spotify.com/playlist/37i9dQZF1DX11gh2tH1b8e'
   },
   {
-    id: 'urdu-coffee',
-    tag: '03 // DTU ART & POETRY',
-    title: 'Midnight Ghazal & Coffee',
-    vibe: 'Echoes in the quiet hour & black espresso steam',
-    genre: 'Acoustic Sufi • Urdu Lo-Fi • Soul',
-    stats: '86 Tracks • 2 AM Nostalgia',
-    image: '/playlists/urdu-coffee.svg',
-    imageAlt: 'Midnight Ghazal and Coffee Cover Art',
-    rotate: 2.2,
+    id: 'latent-space',
+    title: 'Latent Space Drift',
+    vibe: 'Speculative Decoding & 3 AM Multi-Agent Topology',
+    genre: 'Cyber Downtempo • Minimal Tech',
+    stats: '142 Tracks • Deep Focus',
+    image: '/playlists/latent-drift.svg',
+    imageAlt: 'Latent Space Drift Cover Art',
+    rotate: 2.0,
     stubAdmit: 'ADMIT 03',
-    stubAction: 'RIP FOR SOUL',
+    stubAction: 'RIP TO STREAM',
     stubNumber: 'NO. 004183',
-    accentColor: '#f59e0b',
-    spotifyUrl: 'https://open.spotify.com/playlist/37i9dQZF1DX0XUfTFmNBRM'
+    accentColor: '#c084fc',
+    spotifyId: '37i9dQZF1DXdLEN7aqioXM',
+    spotifyUrl: 'https://open.spotify.com/playlist/37i9dQZF1DXdLEN7aqioXM'
   }
 ];
 
 export default function SonicVault({ theme = 'dark' }) {
   const [tornTickets, setTornTickets] = useState({});
 
-  const handleTear = useCallback((id, url) => {
+  const handleTear = useCallback((id) => {
     setTornTickets(prev => ({ ...prev, [id]: true }));
-    // Optional smooth delay before opening external link or keep user on ticket
   }, []);
 
   const handleReset = useCallback((e, id) => {
@@ -70,22 +69,14 @@ export default function SonicVault({ theme = 'dark' }) {
   return (
     <section id="easter-egg" className="sonic-vault-section">
       <div className="sonic-vault-container">
-        {/* Sarcastic Header */}
+        {/* Clean, Sharp, Minimalist Sarcastic Header */}
         <div className="sonic-vault-header">
-          <div className="sonic-vault-badge">
-            <Sparkles size={13} />
-            <span>05 // UNCLASSIFIED EASTER EGG</span>
-          </div>
           <h3 className="sonic-vault-title">
-            Wait... you scrolled all the way to the abyss?
+            What, you want my playlist now?
           </h3>
           <p className="sonic-vault-subtitle">
-            What, you want my playlists now? Fine. Pick a ticket, grab the perforated stub, and tear it open.
-            Real frequencies only — no skips allowed.
+            Fine. Pick a ticket, tear the stub.
           </p>
-          <div className="sonic-vault-instruction">
-            <span>✂️ Grab &amp; drag the stub on the right to tear it open</span>
-          </div>
         </div>
 
         {/* 3 Staggered Physical Tear Tickets */}
@@ -103,7 +94,7 @@ export default function SonicVault({ theme = 'dark' }) {
                   imageAlt={playlist.imageAlt}
                   rotate={playlist.rotate}
                   torn={isTorn}
-                  onTear={() => handleTear(playlist.id, playlist.spotifyUrl)}
+                  onTear={() => handleTear(playlist.id)}
                   background={theme === 'light' ? '#ffffff' : '#18181b'}
                   stubBackground={theme === 'light' ? '#f4f4f5' : '#1f1f24'}
                   borderColor={theme === 'light' ? 'rgba(0,0,0,0.12)' : 'rgba(255,255,255,0.12)'}
@@ -138,40 +129,45 @@ export default function SonicVault({ theme = 'dark' }) {
                   {/* Left Main Ticket Body */}
                   <div className="ticket-body-content">
                     {isTorn ? (
-                      /* Unlocked state after tearing the stub */
+                      /* Official Spotify Embed Player Revealed on Tear! */
                       <div className="ticket-unlocked-state">
-                        <span className="unlocked-badge">
-                          🎧 ACCESS GRANTED // TORN
-                        </span>
-                        <a
-                          href={playlist.spotifyUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="unlocked-play-btn"
-                        >
-                          <Music size={14} />
-                          <span>Stream on Spotify</span>
-                          <ExternalLink size={13} />
-                        </a>
-                        <button
-                          type="button"
-                          onClick={(e) => handleReset(e, playlist.id)}
-                          className="ticket-reset-btn"
-                          title="Re-stitch ticket"
-                        >
-                          <RotateCcw size={11} />
-                          <span>Re-stitch stub</span>
-                        </button>
+                        <iframe
+                          style={{
+                            borderRadius: '10px',
+                            border: 'none',
+                            width: '100%',
+                            height: '152px',
+                            background: 'transparent'
+                          }}
+                          src={`https://open.spotify.com/embed/playlist/${playlist.spotifyId}?utm_source=generator&theme=${theme === 'light' ? '1' : '0'}`}
+                          allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                          loading="lazy"
+                          title={playlist.title}
+                        />
+                        <div className="unlocked-actions-row">
+                          <a
+                            href={playlist.spotifyUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="unlocked-app-link"
+                          >
+                            <span>Open in Spotify</span>
+                            <ExternalLink size={11} />
+                          </a>
+                          <button
+                            type="button"
+                            onClick={(e) => handleReset(e, playlist.id)}
+                            className="ticket-reset-btn"
+                            title="Re-stitch stub"
+                          >
+                            <RotateCcw size={11} />
+                            <span>Re-stitch</span>
+                          </button>
+                        </div>
                       </div>
                     ) : (
                       /* Normal Resting State */
                       <>
-                        <div
-                          className="ticket-top-tag"
-                          style={{ color: playlist.accentColor }}
-                        >
-                          {playlist.tag}
-                        </div>
                         <h4 className="ticket-playlist-title">{playlist.title}</h4>
                         <p className="ticket-playlist-vibe">{playlist.vibe}</p>
 

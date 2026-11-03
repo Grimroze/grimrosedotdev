@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bg2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#050505" />
+      <stop offset="50%" stop-color="#180512" />
+      <stop offset="100%" stop-color="#2d0617" />
+    </linearGradient>
+    <linearGradient id="chrome" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#f43f5e" />
+      <stop offset="40%" stop-color="#fb7185" />
+      <stop offset="70%" stop-color="#ffffff" />
+      <stop offset="100%" stop-color="#fda4af" />
+    </linearGradient>
+    <radialGradient id="burst" cx="70%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#f43f5e" stop-opacity="0.45" />
+      <stop offset="100%" stop-color="#050505" stop-opacity="0" />
+    </radialGradient>
+  </defs>
+  <rect width="100%" height="100%" fill="url(#bg2)" />
+  <rect width="100%" height="100%" fill="url(#burst)" />
+
+  <!-- Speed Slashes & Glitch Stripes -->
+  <g stroke="rgba(244, 63, 94, 0.3)" stroke-width="1.5">
+    <line x1="-50" y1="280" x2="350" y2="-20" stroke-width="1" opacity="0.4" />
+    <line x1="0" y1="320" x2="420" y2="40" stroke-width="2.5" stroke="url(#chrome)" opacity="0.8" />
+    <line x1="50" y1="350" x2="450" y2="70" stroke-width="1" opacity="0.5" />
+    <line x1="-100" y1="180" x2="250" y2="-80" stroke-width="0.8" opacity="0.3" />
+  </g>
+
+  <!-- Metallic Knight Crest / Liquid Chrome Curves -->
+  <path d="M120,240 C160,140 280,180 340,60" stroke="url(#chrome)" stroke-width="6" fill="none" stroke-linecap="round" filter="drop-shadow(0 0 14px rgba(244,63,94,0.7))" />
+  <path d="M80,260 C130,170 230,200 300,100" stroke="#ffffff" stroke-width="2" fill="none" stroke-linecap="round" opacity="0.8" />
+
+  <!-- Speed Dots & Spark -->
+  <circle cx="340" cy="60" r="4.5" fill="#ffffff" filter="drop-shadow(0 0 10px #ffffff)" />
+  <polygon points="340,46 343,57 354,60 343,63 340,74 337,63 326,60 337,57" fill="#ffffff" />
+
+  <!-- High-Cadence Barcode Graphic -->
+  <g fill="rgba(255,255,255,0.7)">
+    <rect x="24" y="240" width="3" height="24" />
+    <rect x="30" y="240" width="6" height="24" />
+    <rect x="39" y="240" width="2" height="24" />
+    <rect x="44" y="240" width="8" height="24" />
+    <rect x="55" y="240" width="4" height="24" />
+    <rect x="62" y="240" width="2" height="24" />
+    <rect x="67" y="240" width="7" height="24" />
+  </g>
+</svg>

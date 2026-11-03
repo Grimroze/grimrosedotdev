@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bg3" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#090705" />
+      <stop offset="60%" stop-color="#1c110a" />
+      <stop offset="100%" stop-color="#2c1a0e" />
+    </linearGradient>
+    <linearGradient id="gold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fef08a" />
+      <stop offset="40%" stop-color="#f59e0b" />
+      <stop offset="100%" stop-color="#b45309" />
+    </linearGradient>
+    <radialGradient id="vinylGlow" cx="65%" cy="50%" r="55%">
+      <stop offset="0%" stop-color="#d97706" stop-opacity="0.32" />
+      <stop offset="100%" stop-color="#090705" stop-opacity="0" />
+    </radialGradient>
+  </defs>
+  <rect width="100%" height="100%" fill="url(#bg3)" />
+  <rect width="100%" height="100%" fill="url(#vinylGlow)" />
+
+  <!-- Concentric Vinyl Grooves -->
+  <g stroke="rgba(245, 158, 11, 0.16)" stroke-width="1" fill="none">
+    <circle cx="270" cy="150" r="120" />
+    <circle cx="270" cy="150" r="100" />
+    <circle cx="270" cy="150" r="80" stroke="rgba(245, 158, 11, 0.25)" />
+    <circle cx="270" cy="150" r="60" />
+    <circle cx="270" cy="150" r="40" stroke="url(#gold)" stroke-width="1.5" />
+    <circle cx="270" cy="150" r="18" fill="#1c110a" stroke="url(#gold)" stroke-width="2" />
+    <circle cx="270" cy="150" r="4" fill="#fef08a" />
+  </g>
+
+  <!-- Coffee Steam & Soundwave Aura -->
+  <path d="M70,240 Q100,190 85,150 T105,70" stroke="url(#gold)" stroke-width="2.5" fill="none" stroke-linecap="round" opacity="0.75" />
+  <path d="M90,250 Q120,200 105,160 T125,85" stroke="#fef08a" stroke-width="1.5" fill="none" stroke-linecap="round" opacity="0.5" />
+
+  <!-- Poetic Verse Accent (Art & Poetry) -->
+  <text x="24" y="240" font-family="'Cinzel', 'Times New Roman', serif" font-size="14" font-style="italic" fill="rgba(254, 240, 138, 0.75)">
+    "Echoes in the quiet hour"
+  </text>
+  <text x="24" y="258" font-family="'Space Grotesk', monospace" font-size="8.5" fill="rgba(245, 158, 11, 0.6)" letter-spacing="1">
+    DTU ART &amp; POETRY // ACOUSTIC ECHOES
+  </text>
+</svg>

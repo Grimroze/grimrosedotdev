@@ -15,6 +15,7 @@ import ProjectDeck from './components/ProjectDeck';
 import SitePreloader from './components/SitePreloader';
 import FoundationsArchive from './components/FoundationsArchive';
 import ConnectLoop from './components/ConnectLoop';
+import SonicVault from './components/SonicVault';
 import AiOrbTrigger from './components/AiOrbTrigger';
 import AiChatDrawer from './components/AiChatDrawer';
 import ThemeToggle from './components/ThemeToggle';
@@ -317,6 +318,7 @@ export default function App() {
       touchMultiplier: 1.5,
     });
     lenisRef.current = lenis;
+    if (typeof window !== 'undefined') window.__lenis = lenis;
 
     // Immediately ensure we are at top
     lenis.scrollTo(0, { immediate: true });
@@ -923,6 +925,9 @@ export default function App() {
           {/* Exact React Bits LogoLoop Positioned Lower Down With Full Span & Zero Clutter */}
           <ConnectLoop />
         </section>
+
+        {/* Easter Egg Section: The Sonic Vault (Multiple Physical TearTickets) */}
+        <SonicVault theme={theme} />
       </div>
     </div>
   );

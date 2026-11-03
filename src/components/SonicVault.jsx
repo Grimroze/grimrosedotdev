@@ -7,47 +7,35 @@ const PLAYLISTS = [
   {
     id: 'heart-cramps',
     title: 'Heart cramps',
-    vibe: 'Late night melancholy & acoustic reverie',
-    genre: 'Melancholy • Indie • Acoustic',
-    stats: 'Curated by Goldi',
-    image: '/playlists/urdu-coffee.svg',
-    imageAlt: 'Heart cramps Cover Art',
+    curator: 'GRIM',
+    stats: '84 Tracks',
+    image: '/playlists/heart-cramps.jpg',
+    imageAlt: 'Heart cramps Playlist Cover Art',
     rotate: -1.6,
-    stubAdmit: 'ADMIT 01',
-    stubAction: 'RIP TO PLAY',
-    stubNumber: 'NO. 001429',
     accentColor: '#fb7185',
     spotifyId: '64IWRoJTxIvA55ckPfFKL1',
     spotifyUrl: 'https://open.spotify.com/playlist/64IWRoJTxIvA55ckPfFKL1'
   },
   {
     id: 'knight-flow',
-    title: 'LeetCode Knight // Flow',
-    vibe: 'Sub-15ms Dynamic Programming & High-Octane Rush',
-    genre: 'Phonk • Dark Synth • 160 BPM',
-    stats: '98 Tracks • Speed Run',
+    title: 'Flow State // Rigor',
+    curator: 'GRIM',
+    stats: 'Coding Trance',
     image: '/playlists/knight-flow.svg',
-    imageAlt: 'LeetCode Knight Flow Cover Art',
+    imageAlt: 'Flow State Playlist Cover Art',
     rotate: 0.5,
-    stubAdmit: 'ADMIT 02',
-    stubAction: 'TEAR FOR SPEED',
-    stubNumber: 'NO. 008921',
     accentColor: '#38bdf8',
-    spotifyId: '37i9dQZF1DX11gh2tH1b8e',
-    spotifyUrl: 'https://open.spotify.com/playlist/37i9dQZF1DX11gh2tH1b8e'
+    spotifyId: '37i9dQZF1DWWQRwui0ExPn',
+    spotifyUrl: 'https://open.spotify.com/playlist/37i9dQZF1DWWQRwui0ExPn'
   },
   {
     id: 'latent-space',
     title: 'Latent Space Drift',
-    vibe: 'Speculative Decoding & 3 AM Multi-Agent Topology',
-    genre: 'Cyber Downtempo • Minimal Tech',
-    stats: '142 Tracks • Deep Focus',
+    curator: 'GRIM',
+    stats: 'Deep Focus',
     image: '/playlists/latent-drift.svg',
     imageAlt: 'Latent Space Drift Cover Art',
     rotate: 2.0,
-    stubAdmit: 'ADMIT 03',
-    stubAction: 'RIP TO STREAM',
-    stubNumber: 'NO. 004183',
     accentColor: '#c084fc',
     spotifyId: '37i9dQZF1DXdLEN7aqioXM',
     spotifyUrl: 'https://open.spotify.com/playlist/37i9dQZF1DXdLEN7aqioXM'
@@ -101,14 +89,15 @@ export default function SonicVault({ theme = 'dark' }) {
                   color={theme === 'light' ? '#09090b' : '#f5f5f5'}
                   stub={
                     <div className="ticket-stub-inner">
-                      <span className="ticket-stub-admit">{playlist.stubAdmit}</span>
+                      <span className="ticket-stub-brand">SPOTIFY</span>
 
-                      <div className="ticket-stub-rip-cue">
-                        <span className="ticket-stub-scissors">✂️</span>
-                        <span className="ticket-stub-action-text">{playlist.stubAction}</span>
+                      <div className="ticket-stub-meta">
+                        <span className="ticket-stub-title">{playlist.title}</span>
+                        <span className="ticket-stub-curator">BY {playlist.curator}</span>
+                        <span className="ticket-stub-count">{playlist.stats}</span>
                       </div>
 
-                      {/* Barcode Graphic */}
+                      {/* Clean Minimal Barcode Graphic */}
                       <div className="ticket-stub-barcode">
                         <span className="ticket-stub-barcode-bar" style={{ width: '2px' }} />
                         <span className="ticket-stub-barcode-bar" style={{ width: '5px' }} />
@@ -121,8 +110,6 @@ export default function SonicVault({ theme = 'dark' }) {
                         <span className="ticket-stub-barcode-bar" style={{ width: '5px' }} />
                         <span className="ticket-stub-barcode-bar" style={{ width: '2px' }} />
                       </div>
-
-                      <span className="ticket-stub-no">{playlist.stubNumber}</span>
                     </div>
                   }
                 >
@@ -169,7 +156,7 @@ export default function SonicVault({ theme = 'dark' }) {
                       /* Normal Resting State */
                       <>
                         <h4 className="ticket-playlist-title">{playlist.title}</h4>
-                        <p className="ticket-playlist-vibe">{playlist.vibe}</p>
+                        <p className="ticket-playlist-vibe">{`Curated by ${playlist.curator}`}</p>
 
                         <div className="ticket-footer-row">
                           <span className="ticket-stats">{playlist.stats}</span>

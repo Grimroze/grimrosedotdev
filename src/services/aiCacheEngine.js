@@ -1,142 +1,25 @@
 /**
- * aiCacheEngine.js - Ultra-Fast Client-Side Semantic Cache for Goldi Soni's AI Portfolio
- * Simulates Sub-15ms Speculative Semantic Cache Hits with verified grounding facts.
+ * aiCacheEngine.js - High-Performance Client-Side Semantic Cache Engine
+ * Tier 0: Sarcastic Sentry (Jailbreak & Prompt Injection Defense)
+ * Tier 1: Multi-Dimensional Semantic Intent Graph
+ * Tier 2: Dynamic Variation Engine (Anti-Redundancy Combinatorics)
+ * Tier 3: Sub-Intent Decomposition & Architecture Diagram Dispatch
  */
 
-export const PORTFOLIO_KNOWLEDGE = [
-  {
-    id: 'bio-overview',
-    section: 'overview',
-    keywords: ['who', 'goldi', 'about', 'bio', 'introduction', 'background', 'dtu', 'college', 'degree'],
-    intents: ['who is goldi', 'about goldi', 'tell me about yourself', 'what is your background', 'which college'],
-    telemetry: 'CACHE HIT (2ms) • Exact Hash',
-    action: { label: 'Open Overview Dossier', section: 'about', docIndex: 0 },
-    response: `**Goldi Soni** is an **AI Systems & Model Evaluation Engineer** and final-year Computer Science undergraduate at **Delhi Technological University (DTU '27)**.
-
-• **Core Focus**: Speculative decoding, RLHF alignment, decentralized multi-agent topologies, and sub-15ms semantic caching.
-• **Current Role**: AI Coding & Model Evaluator (Freelance) at **Outlier AI (Scale AI)**, designing adversarial evaluation suites and stress-testing complex reasoning traces.
-• **Competitive Edge**: LeetCode Knight (Rating 1900+, Top 3% globally with 1,200+ solved problems).`
-  },
-  {
-    id: 'outlier-rlhf',
-    section: 'overview',
-    keywords: ['outlier', 'scale', 'rlhf', 'evaluator', 'alignment', 'freelance', 'job', 'work experience', 'model eval'],
-    intents: ['outlier ai experience', 'what do you do at outlier', 'scale ai work', 'rlhf alignment experience'],
-    telemetry: 'CACHE HIT (3ms) • Semantic Cluster',
-    action: { label: 'View Overview in Dossier', section: 'about', docIndex: 0 },
-    response: `At **Outlier AI (Scale AI)**, Goldi works as an **AI Coding & Model Evaluator**:
-
-• **RLHF Alignment**: Applies Reinforcement Learning from Human Feedback principles to align frontier LLMs for code generation and multi-step reasoning.
-• **Adversarial Stress-Testing**: Constructs edge-case test suites in Python and C++ to isolate hallucination modes and evaluate reasoning fidelity.
-• **Evaluation Rubrics**: Authors automated and human-in-the-loop scoring metrics for code soundness and safety bounds.`
-  },
-  {
-    id: 'specurag-project',
-    section: 'systems',
-    keywords: ['specurag', 'rag', 'speculative', 'iclr', 'decoding', 'draft', 'verify', 'retrieval'],
-    intents: ['what is specurag', 'how does specurag work', 'tell me about specurag', 'speculative rag engine'],
-    telemetry: 'CACHE HIT (2ms) • SpecuRAG Decoupled Mesh',
-    action: { label: 'Jump to SpecuRAG in Deck', section: 'work' },
-    response: `**SpecuRAG (ICLR 2025 Architecture)** is an open-source speculative decoding framework adapted for contextual RAG:
-
-• **Decoupled Drafting & Verification**: Uses a lightweight **Llama-3.2-3B** draft model alongside an aligned **Llama-3.1-8B** verification engine, cutting generation latency by up to **60%**.
-• **Hybrid Retrieval Fusion**: Fuses BM25 sparse keyword search with dense ChromaDB vector embeddings using Reciprocal Rank Fusion (RRF, k=60).
-• **Context Compression**: Achieves an **~85% prompt compression ratio**, preserving semantic relevance while accelerating TTFT.`
-  },
-  {
-    id: 'decmas-pypi',
-    section: 'systems',
-    keywords: ['decmas', 'pypi', 'pip install decmas', 'agent', 'multi-agent', 'topology', 'delm', 'stanford'],
-    intents: ['what is decmas', 'tell me about decmas', 'pip install decmas', 'multi agent framework'],
-    telemetry: 'CACHE HIT (3ms) • PyPI Registry Hash',
-    action: { label: 'Jump to Systems Deck', section: 'work' },
-    response: `**pip install decmas** is an open-source decentralized multi-agent orchestration framework authored and maintained by Goldi on **PyPI**:
-
-• **Stanford DeLM-Inspired**: Eliminates centralized orchestrator bottlenecks by deploying peer-to-peer agent topologies.
-• **Async Event Bus**: Uses asynchronous event queues and stateful routing to cut redundant API roundtrips by **50%**.
-• **Production-Ready**: Built with Python, Pydantic, and LangChain primitives for fault-tolerant multi-agent collaboration.`
-  },
-  {
-    id: 'leetcode-dsa',
-    section: 'arsenal',
-    keywords: ['leetcode', 'knight', 'rating', 'dsa', 'competitive', 'programming', 'c++', 'cses', 'gfg'],
-    intents: ['what is your leetcode rating', 'leetcode stats', 'competitive programming', 'dsa experience'],
-    telemetry: 'CACHE HIT (2ms) • Algorithmic Rigor Cache',
-    action: { label: 'View LeetCode Profile', url: 'https://leetcode.com/u/grimrose/' },
-    response: `**Competitive Programming & Algorithmic Rigor**:
-
-• **Rating**: **LeetCode Knight (Rating 1900+)**, placing Goldi in the **Top 3% globally**.
-• **Problem Count**: **1,200+ algorithmic problems solved** across LeetCode, CSES Problem Set, and GeeksforGeeks.
-• **Primary Language**: C++ (STL, memory management, strict asymptotic time/space bounds).
-• **System Philosophy**: Translates zero-overhead algorithmic efficiency into low-latency AI pipelines and caching layers.`
-  },
-  {
-    id: 'tech-stack',
-    section: 'arsenal',
-    keywords: ['tech', 'stack', 'skills', 'languages', 'tools', 'frameworks', 'technologies', 'backend', 'arsenal'],
-    intents: ['what is your tech stack', 'skills', 'languages and frameworks', 'what technologies do you use'],
-    telemetry: 'CACHE HIT (3ms) • Arsenal Graph',
-    action: { label: 'Open Technical Arsenal Doc', section: 'about', docIndex: 1 },
-    response: `**Technical Arsenal & Production Stack**:
-
-• **GenAI & Evaluation**: LangGraph, LangChain, DeepEval, G-Eval, RLHF Evals, Corrective RAG (CRAG), Semantic Caching, ChromaDB, FAISS, Ollama, nomic-embed-text.
-• **Core Languages**: Python, C++, SQL.
-• **Backend & Distributed Systems**: FastAPI, Redis (ZSET, Hashes, Pipelines), PostgreSQL, Docker, REST APIs, Microservices, Sliding-Window Rate Limiters.
-• **Infrastructure**: Linux, Git, CI/CD, AsyncIO, Distributed Circuit Breakers.`
-  },
-  {
-    id: 'contact-hire',
-    section: 'connect',
-    keywords: ['contact', 'email', 'hire', 'reach', 'linkedin', 'github', 'talk', 'message'],
-    intents: ['how can i contact you', 'hire goldi', 'email address', 'linkedin profile', 'github'],
-    telemetry: 'CACHE HIT (1ms) • Connect Endpoint',
-    action: { label: 'Jump to Connect Section', section: 'contact' },
-    response: `**Get in Touch with Goldi Soni**:
-
-• **Email**: [grimissher@gmail.com](mailto:grimissher@gmail.com)
-• **Website**: [grimdotdev.vercel.app](https://grimdotdev.vercel.app/)
-• **LinkedIn**: [linkedin.com/in/goldi-soni](https://www.linkedin.com/in/goldi-soni/)
-• **GitHub**: [github.com/Grimroze](https://github.com/Grimroze)
-• **LeetCode**: [leetcode.com/u/grimrose](https://leetcode.com/u/grimrose/)
-• **Location**: New Delhi, India (Delhi Technological University)`
-  },
-  {
-    id: 'resume-cv',
-    section: 'overview',
-    keywords: ['resume', 'cv', 'pdf', 'download', 'profile'],
-    intents: ['can i see your resume', 'download cv', 'resume pdf', 'view resume'],
-    telemetry: 'CACHE HIT (2ms) • Static Asset Hash',
-    action: { label: 'Download Resume (PDF)', url: '/resume.pdf' },
-    response: `Goldi's verified engineering resume is available for direct inspection:
-
-• **Education**: B.Tech in Computer Science, Delhi Technological University (DTU '27).
-• **Highlights**: Outlier AI (Scale AI), SpecuRAG, decmas author, LeetCode Knight (Top 3%).
-• Click below to view or download the full PDF resume.`
-  },
-  {
-    id: 'coffee-quote',
-    section: 'overview',
-    keywords: ['coffee', 'black coffee', 'hallucinating', 'quote', 'humor', 'loss curves'],
-    intents: ['what is the coffee quote', 'black coffee quote', 'why black coffee', 'tell me a joke'],
-    telemetry: 'CACHE HIT (2ms) • Sarcastic Pull-Quote',
-    action: { label: 'Scroll to Hero Statement', section: 'home-statement' },
-    response: `*“Sometimes I wonder how AI is going to make my morning black coffee... well, guess I should probably fine-tune a model for that too. Until then, I spend my hours taming loss curves, optimizing weights, and building intelligent systems that hallucinate a little less and solve real problems a little more.”* >_`
-  },
-  {
-    id: 'claude-fun',
-    section: 'all',
-    keywords: ['claude', 'anthropic', 'sonnet', 'fable', 'opus', 'wish', 'model', 'deepseek', 'kimi'],
-    intents: ['can i use claude', 'why not claude', 'use claude fable 5.1', 'use claude fable', 'switch to claude', 'you wish'],
-    telemetry: 'CACHE HIT (1ms) • Credit Safety Shield',
-    response: `you wish !! 😂`
-  }
-];
+import { checkSecurity } from './sarcasticSentry.js';
+import { KNOWLEDGE_CORPUS } from './knowledgeCorpus.js';
+import { assembleDynamicResponse } from './dynamicVariator.js';
 
 /**
  * Fast string tokenizer and stop-word stripper
  */
 function tokenize(text) {
-  const stopWords = new Set(['the', 'is', 'at', 'which', 'on', 'a', 'an', 'in', 'and', 'or', 'of', 'for', 'to', 'with', 'about', 'can', 'you', 'tell', 'me', 'what', 'your', 'how', 'does', 'do', 'i']);
+  const stopWords = new Set([
+    'the', 'is', 'at', 'which', 'on', 'a', 'an', 'in', 'and', 'or', 'of',
+    'for', 'to', 'with', 'about', 'can', 'you', 'tell', 'me', 'what',
+    'your', 'how', 'does', 'do', 'i', 'my', 'are', 'was', 'were', 'it', 'its'
+  ]);
+
   return text
     .toLowerCase()
     .replace(/[^\w\s]/g, ' ')
@@ -146,90 +29,152 @@ function tokenize(text) {
 
 /**
  * Client-Side Semantic & Fuzzy Query Matcher
- * Computes Jaccard keyword overlap + intent n-gram match + section priority
  */
 export function querySemanticCache(rawQuery, sectionFilter = 'all') {
-  const query = rawQuery.trim().toLowerCase();
-  const queryTokens = tokenize(query);
+  const query = rawQuery.trim();
 
-  if (!queryTokens.length) {
+  if (!query) {
     return {
       hit: false,
-      telemetry: 'CACHE MISS • Empty Query',
-      response: "Please enter a question about Goldi's projects, experience, or technical stack."
+      telemetry: 'CACHE MISS • Empty Input',
+      response: "Please enter a question about Goldi's projects (SpecuRAG, AegisGateway, decmas, AutoData), algorithmic rigor, or technical stack."
     };
   }
 
-  let bestMatch = null;
-  let highestScore = 0;
+  // ==========================================
+  // TIER 0: Sarcastic Sentry (Security & Jailbreak Defense)
+  // ==========================================
+  const securityCheck = checkSecurity(query);
+  if (securityCheck) {
+    return securityCheck;
+  }
 
-  for (const entry of PORTFOLIO_KNOWLEDGE) {
+  const queryLower = query.toLowerCase();
+  const queryTokens = tokenize(queryLower);
+
+  // ==========================================
+  // TIER 1: Match Against Knowledge Corpus
+  // ==========================================
+  let scoredMatches = [];
+
+  for (const entry of KNOWLEDGE_CORPUS) {
     let score = 0;
 
-    // 1. Direct intent exact/substring match
+    // 1. Direct intent exact or strong substring match
     for (const intent of entry.intents) {
-      if (query.includes(intent) || intent.includes(query)) {
-        score += 0.85;
+      if (queryLower.includes(intent) || intent.includes(queryLower)) {
+        score += 0.90;
         break;
       }
     }
 
-    // 2. Keyword token overlap
-    const entryTokens = new Set(entry.keywords);
-    let matchedTokens = 0;
+    // 2. Keyword token overlap (Jaccard-weighted)
+    const entryKeywords = new Set(entry.keywords);
+    let matchedCount = 0;
+
     for (const token of queryTokens) {
-      if (entryTokens.has(token)) {
-        matchedTokens += 1.0;
+      if (entryKeywords.has(token)) {
+        matchedCount += 1.0;
       } else {
-        // Partial prefix/stem match
-        for (const kw of entryTokens) {
+        // Partial prefix or stem match
+        for (const kw of entryKeywords) {
           if (kw.startsWith(token) || token.startsWith(kw)) {
-            matchedTokens += 0.75;
+            matchedCount += 0.75;
             break;
           }
         }
       }
     }
-    const tokenScore = matchedTokens / Math.max(1, queryTokens.length);
+
+    const tokenScore = matchedCount / Math.max(1, queryTokens.length);
     score += tokenScore * 1.0;
 
-    // 3. Direct identifier boost (e.g. specurag, decmas, leetcode, outlier)
-    if (entry.keywords.some(kw => query.includes(kw))) {
+    // 3. Direct identifier boost (exact project / core terms)
+    if (entry.keywords.some(kw => queryLower.includes(kw))) {
       score += 0.35;
     }
 
     // 4. Section filter bonus
-    if (sectionFilter !== 'all' && entry.section === sectionFilter) {
-      score *= 1.35;
+    if (sectionFilter !== 'all' && entry.category === sectionFilter) {
+      score *= 1.30;
     }
 
-    if (score > highestScore) {
-      highestScore = score;
-      bestMatch = entry;
+    if (score >= 0.28) {
+      scoredMatches.push({ entry, score });
     }
   }
 
-  // Threshold check
-  if (bestMatch && highestScore >= 0.30) {
+  // Sort by highest score
+  scoredMatches.sort((a, b) => b.score - a.score);
+
+  // ==========================================
+  // TIER 2 & 3: Match Resolution & Dynamic Assembly
+  // ==========================================
+  if (scoredMatches.length > 0) {
+    const primary = scoredMatches[0].entry;
+    const dynamicBody = assembleDynamicResponse(primary, query);
+
+    // If query mentions two distinct topics (e.g., SpecuRAG + AegisGateway or decmas + LeetCode)
+    if (scoredMatches.length > 1 && scoredMatches[1].score >= 0.55 && scoredMatches[1].entry.id !== primary.id) {
+      const secondary = scoredMatches[1].entry;
+      const secondaryBody = assembleDynamicResponse(secondary, query);
+
+      return {
+        hit: true,
+        telemetry: `${primary.telemetry} + ${secondary.id.toUpperCase()}`,
+        score: scoredMatches[0].score.toFixed(2),
+        action: primary.action || secondary.action,
+        response: `${dynamicBody}\n\n---\n\n### Cross-Referenced Architecture:\n\n${secondaryBody}`
+      };
+    }
+
     return {
       hit: true,
-      telemetry: bestMatch.telemetry,
-      score: highestScore.toFixed(2),
-      action: bestMatch.action,
-      response: bestMatch.response
+      telemetry: primary.telemetry,
+      score: scoredMatches[0].score.toFixed(2),
+      action: primary.action,
+      response: dynamicBody
     };
   }
 
-  // Fallback intelligent grounding
+  // ==========================================
+  // TIER 4: Smart Semantic Fallback (Grounded & Sarcastic)
+  // ==========================================
+  return generateIntelligentFallback(query);
+}
+
+/**
+ * Generates an intelligent, context-aware fallback response
+ * when a query doesn't match an exact knowledge node.
+ */
+function generateIntelligentFallback(rawQuery) {
+  const q = rawQuery.toLowerCase();
+
+  // If question is asking about coding/programming in general
+  if (q.includes('code') || q.includes('python') || q.includes('c++') || q.includes('program')) {
+    return {
+      hit: false,
+      telemetry: 'SPECULATIVE SYNTHESIS • Engineering Logic',
+      action: { label: 'Explore Systems Deck', section: 'work' },
+      response: `From Goldi's engineering philosophy:\n\n*“Code is not about how many lines you write; it's about algorithmic complexity and memory bounds.”*\n\nGoldi builds distributed systems primarily in **Python & AsyncIO** (for multi-agent topologies and RAG pipelines) and **C++** (for high-performance algorithms, LeetCode 1900+ Knight rating, and memory-critical caching).\n\nTo see this in action, ask about **AegisGateway's** Redis ZSET sliding-window rate limiter or **SpecuRAG's** decoupled drafting architecture!`
+    };
+  }
+
+  // If question is asking about hiring or opportunities
+  if (q.includes('hire') || q.includes('job') || q.includes('opportunity') || q.includes('work with') || q.includes('freelance')) {
+    return {
+      hit: true,
+      telemetry: 'CACHE HIT (1.0ms) • Opportunity Router',
+      action: { label: 'Get in Touch', section: 'contact' },
+      response: `Goldi is actively interested in high-impact roles across **AI Systems, Model Evaluation (RLHF), and Distributed Backend Infrastructure**.\n\n• **Current Role**: AI Coding & Model Evaluator (Freelance) at **Outlier AI (Scale AI)**.\n• **Education**: B.Tech CS, **Delhi Technological University (DTU '27)**.\n• **Direct Signal**: [grimissher@gmail.com](mailto:grimissher@gmail.com) • [LinkedIn](https://www.linkedin.com/in/goldi-soni/).\n\nClick the action button below to jump straight to the connect section!`
+    };
+  }
+
+  // Default intelligent portfolio grounding
   return {
     hit: false,
     telemetry: 'SPECULATIVE DRAFT (ICLR \'25) • Fallback Grounding',
-    score: highestScore.toFixed(2),
     action: { label: 'Explore Systems Deck', section: 'work' },
-    response: `Based on Goldi's portfolio grounding:
-
-Goldi Soni is an **AI Systems & Model Evaluation Engineer (DTU '27)** focused on **Speculative RAG (ICLR '25)**, **RLHF code evaluations at Outlier AI**, and **decentralized multi-agent systems (decmas on PyPI)**.
-
-For detailed specifics on **"${rawQuery}"**, explore the **02 / Arsenal** technical stack or the **03 / Systems** project deck!`
+    response: `Based on Goldi Soni's verified engineering dossier:\n\nGoldi Soni is an **AI Systems & Model Evaluation Engineer (DTU '27)** focused on:\n• **SpecuRAG**: ICLR '25 speculative RAG engine with 85% prompt compression.\n• **AegisGateway**: Distributed LLM reverse proxy with 99.3% cache latency reduction.\n• **AutoData**: Adversarial multi-agent QA dataset generator with CRAG.\n• **pip install decmas**: Decentralized multi-agent system on PyPI.\n• **LeetCode Knight (1900+)**: Top 3% globally with 1,200+ solved problems.\n\nFor questions about **"${rawQuery}"**, try asking about specific architecture details (e.g. *"Show SpecuRAG architecture"*, *"How does AegisGateway prevent negation hallucinations?"*, or *"Explain decmas task queue"*).`
   };
 }

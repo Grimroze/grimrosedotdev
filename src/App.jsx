@@ -604,12 +604,12 @@ export default function App() {
               size="sm"
               color={theme === 'light' ? '#18181b' : '#faedf1'}
               frame={false}
-              particleCount={32}
-              spread={100}
-              animationTime={600}
-              timeVariance={300}
-              gooeyness={1}
-              wobble={0.5}
+              particleCount={6}
+              spread={18}
+              animationTime={320}
+              timeVariance={50}
+              gooeyness={0.3}
+              wobble={0.12}
               hoverEffect={true}
               onChange={handleNavChange}
             />

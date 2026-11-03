@@ -400,15 +400,15 @@ const GooeyNav = ({
       const rect = rects[index];
       if (!rect) return;
       const reach = Math.max(0, s.spread);
-      const ex = rect.x + rect.w / 2 + (Math.random() - 0.5) * rect.w * 0.45;
-      const ey = rect.y + rect.h / 2 + (Math.random() - 0.5) * rect.h * 0.2;
+      const ex = rect.x + rect.w / 2 + (Math.random() - 0.5) * rect.w * 0.4;
+      const ey = rect.y + rect.h / 2 + (Math.random() - 0.5) * rect.h * 0.1;
       const base = Math.max(0.15, s.animationTime / 1000);
       const variance = (Math.random() - 0.5) * (Math.max(0, s.timeVariance) / 1000);
       const duration = Math.max(0.15, base * (0.62 + Math.random() * 0.32) + variance * 0.6);
       const out = Math.random() * Math.PI * 2;
       const into = Math.random() * Math.PI * 2;
-      const burst = reach * (0.7 + Math.random() * 0.6);
-      const swing = reach * (0.55 + Math.random() * 0.55);
+      const burst = reach * (0.6 + Math.random() * 0.4);
+      const swing = reach * (0.5 + Math.random() * 0.4);
       const carry = Math.min(duration / 3, 0.12);
       drop.index = index;
       drop.start = now;
@@ -416,10 +416,10 @@ const GooeyNav = ({
       drop.path = [
         drop.x,
         drop.y,
-        fresh ? drop.x + Math.cos(out) * burst * 1.6 : drop.x + drop.vx * carry,
-        fresh ? drop.y + Math.sin(out) * burst * 1.6 : drop.y + drop.vy * carry,
-        ex + Math.cos(into) * swing * 1.5,
-        ey + Math.sin(into) * swing * 1.5,
+        fresh ? drop.x + Math.cos(out) * burst * 1.2 : drop.x + drop.vx * carry,
+        fresh ? drop.y + Math.sin(out) * burst * 0.22 : drop.y + drop.vy * 0.2,
+        ex + Math.cos(into) * swing * 1.1,
+        ey + Math.sin(into) * swing * 0.22,
         ex,
         ey
       ];
@@ -676,14 +676,20 @@ const GooeyNav = ({
       const now = performance.now();
       target = index;
       pill(index);
-      for (const drop of drops) {
-        drop.index = index;
-        if (drop.state === 'flying') plan(drop, index, now, false);
-        if (drop.state === 'absorbing') {
-          drop.state = 'flying';
-          drop.mass *= 1 - drop.absorbed;
-          drop.absorbed = 0;
-          plan(drop, index, now, false);
+
+      // If user is jumping across sections or rapid drops accumulated, flush immediately
+      if (drops.length > 5 || Math.abs(index - (target ?? index)) > 1) {
+        drops.length = 0;
+      } else {
+        for (const drop of drops) {
+          drop.index = index;
+          if (drop.state === 'flying') plan(drop, index, now, false);
+          if (drop.state === 'absorbing') {
+            drop.state = 'flying';
+            drop.mass *= 1 - drop.absorbed;
+            drop.absorbed = 0;
+            plan(drop, index, now, false);
+          }
         }
       }
       for (const from of [...pills.keys()]) {

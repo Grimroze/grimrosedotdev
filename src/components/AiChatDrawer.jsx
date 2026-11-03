@@ -6,9 +6,11 @@ import { RotateCcw, X, ArrowUpRight } from 'lucide-react';
 import './AiChatDrawer.css';
 
 const STARTER_PROMPTS = [
-  { label: 'What is SpecuRAG?', query: 'Explain SpecuRAG architecture and speculative decoding' },
-  { label: 'What is decmas on PyPI?', query: 'What is pip install decmas?' },
-  { label: 'LeetCode rating & stats', query: 'What is your LeetCode rating and solved problems?' }
+  { label: 'SpecuRAG Architecture', query: 'Explain SpecuRAG architecture and decoupled drafting' },
+  { label: 'AegisGateway & Caching', query: 'How does AegisGateway sliding window rate limiting and semantic caching work?' },
+  { label: 'decmas on PyPI', query: 'What is pip install decmas and Stanford DeLM topology?' },
+  { label: 'AutoData Adversarial QA', query: 'Explain AutoData weak-strong evaluation loop and CRAG' },
+  { label: 'LeetCode Knight Stats', query: 'What is your LeetCode rating and solved problems?' }
 ];
 
 const WITTY_THOUGHTS = [
@@ -18,6 +20,9 @@ const WITTY_THOUGHTS = [
   "Consulting the LeetCode oracle…",
   "Quantizing thoughts to FP8…",
   "Checking if decmas is on PyPI…",
+  "Scanning Redis ZSET timestamps…",
+  "Verifying BGE lexical polarity…",
+  "Evaluating Weak-Strong benchmark gap…",
   "Recalibrating semantic registers…",
   "Simulating 1,200+ edge cases…",
   "Hallucinating… wait, no, grounding…",
@@ -31,31 +36,53 @@ const WITTY_THOUGHTS = [
 
 const getReasoningSteps = (text) => {
   const t = text.toLowerCase();
+  if (t.includes('aegis') || t.includes('polarity') || t.includes('gateway') || t.includes('redis') || t.includes('rate limit')) {
+    return [
+      "Extracting query lexical polarity & negation tokens",
+      "Scanning BGE-small 384-dim normalized vector index",
+      "Validating Redis ZSET sliding-window rate limit (~1ms)",
+      "Checking distributed Circuit Breaker failover state",
+      "Grounded gateway telemetry assembled"
+    ];
+  }
+  if (t.includes('autodata') || t.includes('dataset') || t.includes('weak') || t.includes('challenger') || t.includes('crag')) {
+    return [
+      "Evaluating Corrective RAG (CRAG) retrieval depth",
+      "Formulating multi-hop question & weighted rubric in Challenger",
+      "Executing Weak Solver (8B) vs Strong Solver (31B)",
+      "Enforcing 20+ point benchmark accuracy gap in Judge",
+      "Adversarial synthetic dataset record verified"
+    ];
+  }
   if (t.includes('specu') || t.includes('rag')) {
     return [
-      "Querying hybrid retrieval index (BM25 + ChromaDB)",
-      "Drafting speculative hypothesis with Llama-3.2-3B",
-      "Running verification pass with Llama-3.1-8B",
+      "Querying dual-channel retrieval index (BM25 + ChromaDB)",
+      "Fusing candidates via Reciprocal Rank Fusion (k=60)",
+      "Drafting speculative rationale with Llama-3.2-3B",
+      "Running context-free verification with Llama-3.1-8B",
       "Grounded architecture brief assembled"
     ];
   }
-  if (t.includes('decmas') || t.includes('pypi') || t.includes('agent')) {
+  if (t.includes('decmas') || t.includes('pypi') || t.includes('agent') || t.includes('delm')) {
     return [
-      "Querying PyPI package registry for decmas",
+      "Querying PyPI package registry for decmas v0.1.1",
       "Traversing Stanford DeLM decentralized P2P topology",
-      "Eliminating central router bottleneck",
+      "Evaluating task dependency DAG under mutex lock",
+      "Running LLM-as-a-Verifier admission gate",
       "Package architecture compiled"
     ];
   }
-  if (t.includes('leetcode') || t.includes('knight') || t.includes('stats') || t.includes('rating')) {
+  if (t.includes('leetcode') || t.includes('knight') || t.includes('stats') || t.includes('rating') || t.includes('dsa') || t.includes('c++')) {
     return [
       "Accessing algorithmic telemetry & contest history",
       "Verifying Knight badge: 1900+ (Top 3% globally)",
       "Parsing 1,200+ solved problems across LeetCode, CSES & GFG",
+      "Validating asymptotic time & space bounds in C++",
       "Complexity profile validated"
     ];
   }
   return [
+    "Scanning Sarcastic Sentry for prompt injection payloads",
     "Encoding prompt embedding with nomic-embed-text",
     "Searching Goldi's engineering dossier registers",
     "Synthesizing direct technical response"
@@ -455,44 +482,96 @@ function renderFormattedText(rawText, isPureTerminated = false) {
     );
   }
 
-  const lines = rawText.split('\n');
+  // Split text by code/diagram blocks ```...```
+  const codeBlockRegex = /```(?:diagram|ascii)?\s*([\s\S]*?)```/g;
+  const sections = [];
+  let lastIndex = 0;
+  let match;
 
-  return lines.map((line, lIdx) => {
-    const isBullet = line.trim().startsWith('•');
-    const content = isBullet ? line.trim().replace(/^•\s*/, '') : line;
+  while ((match = codeBlockRegex.exec(rawText)) !== null) {
+    if (match.index > lastIndex) {
+      sections.push({ type: 'text', content: rawText.slice(lastIndex, match.index) });
+    }
+    sections.push({ type: 'diagram', content: match[1].trim() });
+    lastIndex = match.index + match[0].length;
+  }
+  if (lastIndex < rawText.length) {
+    sections.push({ type: 'text', content: rawText.slice(lastIndex) });
+  }
 
-    const parts = content.split(/(\*\*[^*]+\*\*|\*[^*]+\*|`[^`]+`)/g);
-
-    const renderedLine = parts.map((part, pIdx) => {
-      if (part.startsWith('**') && part.endsWith('**')) {
-        return <strong key={pIdx}>{part.slice(2, -2)}</strong>;
-      }
-      if (part.startsWith('*') && part.endsWith('*')) {
-        return <em key={pIdx}>{part.slice(1, -1)}</em>;
-      }
-      if (part.startsWith('`') && part.endsWith('`')) {
-        return <code key={pIdx} className="ai-inline-code">{part.slice(1, -1)}</code>;
-      }
-      return part;
-    });
-
-    if (isBullet) {
+  return sections.map((sec, sIdx) => {
+    if (sec.type === 'diagram') {
       return (
-        <div key={lIdx} className="ai-bullet-line">
-          <span className="bullet-glyph">•</span>
-          <span className="bullet-text">{renderedLine}</span>
+        <div key={`diag-${sIdx}`} className="ai-diagram-card">
+          <div className="ai-diagram-card-header">
+            <span className="ai-diagram-title">System Architecture Flow</span>
+            <span className="ai-diagram-badge">ICLR / VERIFIED</span>
+          </div>
+          <pre className="ai-diagram-content">{sec.content}</pre>
         </div>
       );
     }
 
-    if (!line.trim()) {
-      return <div key={lIdx} className="ai-spacer-line" />;
-    }
+    const lines = sec.content.split('\n');
 
-    return (
-      <p key={lIdx} className="ai-para-line">
-        {renderedLine}
-      </p>
-    );
+    return lines.map((line, lIdx) => {
+      const trimmed = line.trim();
+
+      if (trimmed === '---') {
+        return <hr key={`hr-${sIdx}-${lIdx}`} className="ai-message-divider" />;
+      }
+
+      const isBullet = trimmed.startsWith('•') || trimmed.startsWith('-');
+      const content = isBullet ? trimmed.replace(/^[•\-]\s*/, '') : line;
+
+      // Tokenize formatting: bold, italic, code, link
+      const parts = content.split(/(\*\*[^*]+\*\*|\*[^*]+\*|`[^`]+`|\[[^\]]+\]\([^)]+\))/g);
+
+      const renderedLine = parts.map((part, pIdx) => {
+        if (part.startsWith('**') && part.endsWith('**')) {
+          return <strong key={pIdx}>{part.slice(2, -2)}</strong>;
+        }
+        if (part.startsWith('*') && part.endsWith('*')) {
+          return <em key={pIdx}>{part.slice(1, -1)}</em>;
+        }
+        if (part.startsWith('`') && part.endsWith('`')) {
+          return <code key={pIdx} className="ai-inline-code">{part.slice(1, -1)}</code>;
+        }
+        const linkMatch = /^\[([^\]]+)\]\(([^)]+)\)$/.exec(part);
+        if (linkMatch) {
+          return (
+            <a
+              key={pIdx}
+              href={linkMatch[2]}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="ai-chat-link"
+            >
+              {linkMatch[1]}
+            </a>
+          );
+        }
+        return part;
+      });
+
+      if (isBullet) {
+        return (
+          <div key={`b-${sIdx}-${lIdx}`} className="ai-bullet-line">
+            <span className="bullet-glyph">•</span>
+            <span className="bullet-text">{renderedLine}</span>
+          </div>
+        );
+      }
+
+      if (!trimmed) {
+        return <div key={`sp-${sIdx}-${lIdx}`} className="ai-spacer-line" />;
+      }
+
+      return (
+        <p key={`p-${sIdx}-${lIdx}`} className="ai-para-line">
+          {renderedLine}
+        </p>
+      );
+    });
   });
 }

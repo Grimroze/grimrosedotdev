@@ -348,36 +348,60 @@
 
 /* Architectural Flow Diagram Card */
 .ai-diagram-card {
-  margin: 12px 0 10px 0;
-  border-radius: 10px;
-  background: rgba(10, 11, 16, 0.95);
+  margin: 14px 0 12px 0;
+  border-radius: 12px;
+  background: rgba(10, 12, 18, 0.96);
   border: 1px solid rgba(56, 189, 248, 0.22);
-  box-shadow: 0 8px 24px -6px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  box-shadow: 0 12px 28px -8px rgba(0, 0, 0, 0.65), inset 0 1px 0 rgba(255, 255, 255, 0.08);
   overflow: hidden;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.ai-diagram-card.is-diagram-expanded {
+  margin-left: -12px;
+  margin-right: -12px;
+  border-color: rgba(56, 189, 248, 0.45);
+  box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.8), inset 0 1px 0 rgba(56, 189, 248, 0.2);
 }
 
 .ai-diagram-card-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 7px 12px;
+  padding: 8px 12px;
   background: rgba(56, 189, 248, 0.06);
   border-bottom: 1px solid rgba(56, 189, 248, 0.14);
+}
+
+.ai-diagram-title-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
 }
 
 .ai-diagram-title {
   font-family: 'Space Grotesk', -apple-system, sans-serif;
   font-size: 11px;
   font-weight: 600;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  color: #e0f2fe;
+  letter-spacing: 0.03em;
+  color: #f0f9ff;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ai-diagram-header-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
 }
 
 .ai-diagram-badge {
   font-family: 'Space Mono', monospace;
-  font-size: 9.5px;
-  padding: 2px 6px;
+  font-size: 9px;
+  padding: 2.5px 7px;
   border-radius: 4px;
   background: rgba(56, 189, 248, 0.12);
   color: #38bdf8;
@@ -385,26 +409,44 @@
   font-weight: 600;
 }
 
-.ai-diagram-content {
-  margin: 0;
-  padding: 12px 14px;
-  font-family: 'JetBrains Mono', 'Space Mono', monospace;
-  font-size: 10.5px;
-  line-height: 1.42;
-  color: #7dd3fc;
-  overflow-x: auto;
-  white-space: pre;
-  scrollbar-width: thin;
-  scrollbar-color: rgba(56, 189, 248, 0.3) transparent;
+.ai-diagram-zoom-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.7);
+  cursor: pointer;
+  transition: all 0.15s ease;
 }
 
-.ai-diagram-content::-webkit-scrollbar {
-  height: 4px;
+.ai-diagram-zoom-btn:hover {
+  background: rgba(56, 189, 248, 0.18);
+  border-color: rgba(56, 189, 248, 0.35);
+  color: #38bdf8;
 }
 
-.ai-diagram-content::-webkit-scrollbar-thumb {
-  background: rgba(56, 189, 248, 0.3);
-  border-radius: 2px;
+.ai-diagram-svg-container {
+  padding: 10px 12px 12px 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(circle at 50% 0%, rgba(56, 189, 248, 0.04), transparent 70%);
+}
+
+.project-arch-svg {
+  width: 100%;
+  height: auto;
+  max-height: 290px;
+  display: block;
+  filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.4));
+}
+
+.is-diagram-expanded .project-arch-svg {
+  max-height: 420px;
 }
 
 .ai-message-divider {
@@ -582,6 +624,33 @@
 
 [data-theme="light"] .ai-message-action-btn:hover {
   background: rgba(0, 0, 0, 0.1);
+}
+
+[data-theme="light"] .ai-diagram-card {
+  background: #0f1219;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  box-shadow: 0 8px 24px -4px rgba(0, 0, 0, 0.2);
+}
+
+[data-theme="light"] .ai-diagram-card-header {
+  background: rgba(15, 23, 42, 0.95);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+[data-theme="light"] .ai-diagram-title {
+  color: #f1f5f9;
+}
+
+[data-theme="light"] .ai-diagram-zoom-btn {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.15);
+  color: #cbd5e1;
+}
+
+[data-theme="light"] .ai-diagram-zoom-btn:hover {
+  background: rgba(56, 189, 248, 0.25);
+  border-color: rgba(56, 189, 248, 0.4);
+  color: #38bdf8;
 }
 
 [data-theme="light"] .ai-drawer-input-dock {

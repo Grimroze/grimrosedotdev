@@ -17,30 +17,7 @@ export const KNOWLEDGE_CORPUS = [
     ],
     telemetry: 'CACHE HIT (1.8ms) • SpecuRAG Decoupled Mesh',
     action: { label: 'Jump to SpecuRAG in Deck', section: 'work' },
-    diagram: `┌─────────────────────────────────────────────────────────────┐
-│ SpecuRAG Architecture (ICLR 2025 Research Implementation)   │
-│                                                             │
-│ [Query Q] ──> [Dual-Channel Search: BM25 + nomic-embed]     │
-│                         │                                   │
-│                         ▼                                   │
-│            [Reciprocal Rank Fusion (k=60)]                  │
-│                         │                                   │
-│                         ▼                                   │
-│          [Dynamic Silhouette K-Means (k ∈ {2, 3})]          │
-│                         │                                   │
-│                         ▼                                   │
-│         [Inverted Modulo Snake Allocation]                  │
-│             ┌───────────┴───────────┐                       │
-│             ▼                       ▼                       │
-│     [Drafter 1: Llama 3B]   [Drafter 2: Llama 3B]           │
-│             │                       │                       │
-│             └───────────┬───────────┘                       │
-│                         ▼ Passes (α, β) [~85% Compression]  │
-│             [Verifier Judge: Llama-3.1-8B]                  │
-│                         │                                   │
-│                         ▼                                   │
-│            [Joint Composite Scoring: ρ = Draft × SC × SR]   │
-└─────────────────────────────────────────────────────────────┘`,
+    diagram: 'specurag',
     intros: [
       "Here is the architectural breakdown of **SpecuRAG** straight from the ICLR 2025 research specs:",
       "Diving into **SpecuRAG** from first principles — where we decouple drafting from verification:",
@@ -91,28 +68,7 @@ Standard RAG crams 10-15 raw document chunks into one massive prompt, causing qu
     ],
     telemetry: 'CACHE HIT (1.4ms) • Aegis Polarity Guard',
     action: { label: 'Explore Systems Deck', section: 'work' },
-    diagram: `┌─────────────────────────────────────────────────────────────┐
-│ AegisGateway Architecture: Resilient Distributed LLM Gateway│
-│                                                             │
-│ [Client Request] ──> [FastAPI Reverse Proxy]                │
-│                            │                                │
-│                            ▼                                │
-│     [Sliding-Window Log Rate Limiter (Redis ZSET, ~1ms)]    │
-│                            │ (If Quota OK)                  │
-│                            ▼                                │
-│     [Two-Stage Semantic Cache: BGE-small (384-dim)]         │
-│                            │                                │
-│             ┌──────────────┴──────────────┐                 │
-│             ▼                             ▼                 │
-│    [Cache Hit: ~14ms]            [Lexical Polarity Guard]   │
-│    (99.3% p95 Latency Drop)      (O(1) Negation Filter)     │
-│                                           │                 │
-│                                           ▼ (On Miss)       │
-│                  [Distributed Circuit Breaker in Redis]     │
-│                         ┌─────────────────┴───────────────┐ │
-│                         ▼                                 ▼ │
-│              [Primary: Llama 3.1 Local]       [Backup: Gemma]│
-└─────────────────────────────────────────────────────────────┘`,
+    diagram: 'aegisgateway',
     intros: [
       "Here is the architecture behind **AegisGateway (NomNom)**, engineered for resilient distributed LLM traffic:",
       "Diving into **AegisGateway** — designed to solve upstream LLM outages, rate burst spikes, and negation hallucinations:",
@@ -158,33 +114,7 @@ Standard RAG crams 10-15 raw document chunks into one massive prompt, causing qu
     ],
     telemetry: 'CACHE HIT (2.2ms) • Adversarial Graph State',
     action: { label: 'Explore Systems Deck', section: 'work' },
-    diagram: `┌─────────────────────────────────────────────────────────────┐
-│ AutoData Architecture: Adversarial QA Dataset Generator     │
-│ (Inspired by Meta FAIR Autodata Research)                   │
-│                                                             │
-│ [Raw Docs] ──> [ChromaDB FastEmbed] ──> [Topic Extractor]   │
-│                                                │            │
-│                                                ▼            │
-│      [Corrective RAG (CRAG) Evaluator + Query Rewriter]     │
-│                                                │            │
-│                                                ▼            │
-│                     [Challenger Agent Node]                 │
-│              (Generates Multi-Hop Question + Rubric)        │
-│                                │                            │
-│                 ┌──────────────┴──────────────┐             │
-│                 ▼                             ▼             │
-│   [Weak Solver: Llama 3.1 8B]   [Strong Solver: Gemma 31B]  │
-│                 │                             │             │
-│                 └──────────────┬──────────────┘             │
-│                                ▼                            │
-│                     [Judge Agent Node]                      │
-│             (Rubric-Based Scoring across Criteria)          │
-│                                │                            │
-│                 ┌──────────────┴──────────────┐             │
-│                 ▼                             ▼             │
-│       [Loop Refinement (≤5)]      [Verified JSON Dataset]   │
-│       (If Weak >50% or Strong <70%)(Weak ≤50% & Strong ≥70%)│
-└─────────────────────────────────────────────────────────────┘`,
+    diagram: 'autodata',
     intros: [
       "Here is the architecture behind **AutoData**, Goldi's adversarial multi-agent synthetic data generator:",
       "Breaking down **AutoData** (inspired by Meta FAIR's research on autonomous dataset synthesis):",
@@ -233,29 +163,7 @@ Standard RAG crams 10-15 raw document chunks into one massive prompt, causing qu
     ],
     telemetry: 'CACHE HIT (1.9ms) • PyPI Registry Hash',
     action: { label: 'View decmas on PyPI', url: 'https://pypi.org/project/decmas/' },
-    diagram: `┌─────────────────────────────────────────────────────────────┐
-│ DeMAS Architecture: pip install decmas (PyPI Package)       │
-│ (Inspired by Stanford DeLM Research)                        │
-│                                                             │
-│ [User Goal] ──> [DemasOrchestrator] ──> [LLM Planner]       │
-│                                                │            │
-│                                                ▼            │
-│        [Thread-Safe TaskQueue with Concurrency Lock]        │
-│              (Topological Dependency Resolver)              │
-│                                │                            │
-│                 ┌──────────────┼──────────────┐             │
-│                 ▼              ▼              ▼             │
-│            [Worker 1]     [Worker 2]     [Worker 3]         │
-│           (Thread OS)    (Thread OS)    (Thread OS)         │
-│                 │              │              │             │
-│                 └──────────────┼──────────────┘             │
-│                                ▼                            │
-│       [Admission Gate: LLM-as-a-Verifier Layer]             │
-│      (Checks strict entailment before state write)          │
-│                                │                            │
-│                                ▼                            │
-│           [VerifiedSharedContext (Blackboard Memory)]       │
-└─────────────────────────────────────────────────────────────┘`,
+    diagram: 'decmas',
     intros: [
       "Here is the breakdown of **decmas**, Goldi's published multi-agent package on PyPI:",
       "Diving into **pip install decmas** — decentralized multi-agent orchestration without router bottlenecks:",

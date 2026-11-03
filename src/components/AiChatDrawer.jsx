@@ -1,7 +1,9 @@
 import React, { useState, useRef, useEffect } from 'react';
 import PromptBar from './PromptBar';
 import ThoughtLine from './ThoughtLine';
+import ProjectSvgDiagram from './ProjectSvgDiagram';
 import { querySemanticCache } from '../services/aiCacheEngine';
+import { checkSecurity } from '../services/sarcasticSentry';
 import { RotateCcw, X, ArrowUpRight } from 'lucide-react';
 import './AiChatDrawer.css';
 
@@ -35,6 +37,16 @@ const WITTY_THOUGHTS = [
 ];
 
 const getReasoningSteps = (text) => {
+  const security = checkSecurity(text);
+  if (security && security.blocked) {
+    return [
+      "Inspecting payload in Sarcastic Sentry (0.3ms)",
+      "Adversarial / Threat signature intercepted",
+      "Zero LLM tokens burned (₹0.00 infra cost)",
+      "Deploying razor-sharp developer retaliation"
+    ];
+  }
+
   const t = text.toLowerCase();
   if (t.includes('aegis') || t.includes('polarity') || t.includes('gateway') || t.includes('redis') || t.includes('rate limit')) {
     return [
@@ -128,12 +140,19 @@ export default function AiChatDrawer({
 
     userScrolledUpRef.current = false;
     const trimmed = text.trim();
-    // Pick random sarcastic/clever AI developer thought
-    const randomThought = WITTY_THOUGHTS[Math.floor(Math.random() * WITTY_THOUGHTS.length)];
+    const match = querySemanticCache(trimmed, selectedSection);
+    const isSecurityBlock = Boolean(match && match.blocked);
+
+    // Pick random sarcastic/clever AI developer thought (or sentry alert for security blocks)
+    const randomThought = isSecurityBlock
+      ? "Intercepted by Sarcastic Sentry (0.3ms)…"
+      : WITTY_THOUGHTS[Math.floor(Math.random() * WITTY_THOUGHTS.length)];
     const steps = getReasoningSteps(trimmed);
 
-    // Latency 2.8s - 3.4s so each step animates and checks off sequentially
-    const latency = Math.floor(2800 + Math.random() * 600);
+    // Latency: fast 650-900ms for security blocks, 2.2-2.8s for deep technical answers
+    const latency = isSecurityBlock
+      ? Math.floor(650 + Math.random() * 250)
+      : Math.floor(2200 + Math.random() * 600);
 
     const newMessages = [
       ...messages,
@@ -149,7 +168,6 @@ export default function AiChatDrawer({
     setCurrentSteps(steps);
 
     thoughtStartTimeRef.current = performance.now();
-    const match = querySemanticCache(trimmed, selectedSection);
 
     // After thinking latency, transition smoothly into real-time token streaming
     timeoutRef.current = setTimeout(() => {
@@ -502,13 +520,10 @@ function renderFormattedText(rawText, isPureTerminated = false) {
   return sections.map((sec, sIdx) => {
     if (sec.type === 'diagram') {
       return (
-        <div key={`diag-${sIdx}`} className="ai-diagram-card">
-          <div className="ai-diagram-card-header">
-            <span className="ai-diagram-title">System Architecture Flow</span>
-            <span className="ai-diagram-badge">ICLR / VERIFIED</span>
-          </div>
-          <pre className="ai-diagram-content">{sec.content}</pre>
-        </div>
+        <ProjectSvgDiagram
+          key={`diag-${sIdx}`}
+          type={sec.content}
+        />
       );
     }
 

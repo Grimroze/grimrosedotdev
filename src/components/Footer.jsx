@@ -5,7 +5,7 @@ import './Footer.css';
 export default function Footer({ theme = 'dark' }) {
   const [timeStr, setTimeStr] = useState('');
 
-  // Live IST (New Delhi) Clock
+  // Live IST (New Delhi) Clock - Clean & Non-Creepy (NO coordinates!)
   useEffect(() => {
     const updateTime = () => {
       try {
@@ -19,7 +19,7 @@ export default function Footer({ theme = 'dark' }) {
         }).format(now);
         setTimeStr(`${ist} IST`);
       } catch {
-        setTimeStr('NEW DELHI');
+        setTimeStr('');
       }
     };
 
@@ -37,7 +37,7 @@ export default function Footer({ theme = 'dark' }) {
   return (
     <footer className="site-colophon-footer" data-theme={theme}>
       <div className="footer-inner-container">
-        {/* Top Architecture Row */}
+        {/* Main Row */}
         <div className="footer-main-row">
           {/* Identity & Status */}
           <div className="footer-col footer-col-identity">
@@ -48,7 +48,7 @@ export default function Footer({ theme = 'dark' }) {
             <div className="footer-status-pill">
               <span className="footer-status-dot" />
               <span className="footer-status-text">
-                {timeStr ? `${timeStr} · 28.61°N, 77.20°E` : '28.61°N, 77.20°E // NEW DELHI'}
+                {timeStr ? `NEW DELHI, INDIA · ${timeStr}` : 'NEW DELHI, INDIA'}
               </span>
             </div>
           </div>
@@ -58,12 +58,10 @@ export default function Footer({ theme = 'dark' }) {
             <p className="footer-philosophy-quote">
               “Overfitting on first principles, underfitting on sleep.”
             </p>
-            <span className="footer-philosophy-author">— dossier colophon</span>
           </div>
 
           {/* Direct Signals / Channels */}
           <div className="footer-col footer-col-links">
-            <span className="footer-links-heading">Signals</span>
             <div className="footer-links-grid">
               <a
                 href="https://github.com/Grimroze"
@@ -103,18 +101,12 @@ export default function Footer({ theme = 'dark' }) {
           </div>
         </div>
 
-        {/* Bottom Colophon Hairline Row */}
+        {/* Bottom Colophon Hairline Row (Clean, zero repetition) */}
         <div className="footer-bottom-bar">
           <div className="footer-legal">
-            <span>© {new Date().getFullYear()} GOLDI SONI</span>
+            <span>© {new Date().getFullYear()} · All rights reserved</span>
             <span className="footer-legal-sep">·</span>
-            <span>ZERO TRACKERS</span>
-            <span className="footer-legal-sep">·</span>
-            <span>NO COOKIES</span>
-          </div>
-
-          <div className="footer-stack-tag">
-            <span>BUILT WITH REACT, LENIS & GSAP</span>
+            <span>Built with React & GSAP</span>
           </div>
 
           <button

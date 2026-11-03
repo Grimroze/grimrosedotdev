@@ -4,7 +4,7 @@
   width: 100%;
   background: transparent;
   border-top: 1px solid rgba(255, 255, 255, 0.08);
-  padding: clamp(48px, 6vh, 64px) 24px clamp(36px, 4vh, 48px);
+  padding: clamp(48px, 6vh, 60px) 24px clamp(32px, 4vh, 40px);
   box-sizing: border-box;
   z-index: 10;
   transition: border-color 0.3s ease;
@@ -16,29 +16,30 @@
   margin: 0 auto;
   display: flex;
   flex-direction: column;
-  gap: clamp(36px, 5vh, 48px);
+  gap: clamp(28px, 4vh, 36px);
 }
 
 /* Main Architectural Grid */
 .footer-main-row {
   width: 100%;
   display: grid;
-  grid-template-columns: 1.2fr 1.4fr 1fr;
-  gap: clamp(24px, 4vw, 48px);
-  align-items: start;
+  grid-template-columns: 1.2fr 1.3fr 1fr;
+  gap: clamp(20px, 3.5vw, 40px);
+  align-items: center;
 }
 
 @media (max-width: 860px) {
   .footer-main-row {
     grid-template-columns: 1fr;
-    gap: 32px;
+    gap: 24px;
+    align-items: start;
   }
 }
 
 .footer-col {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 6px;
 }
 
 /* Col 1: Identity */
@@ -55,15 +56,15 @@
   font-family: 'Space Grotesk', sans-serif;
   font-size: 12px;
   font-weight: 400;
-  line-height: 1.45;
+  line-height: 1.4;
   color: rgba(255, 255, 255, 0.48);
 }
 
 .footer-status-pill {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  margin-top: 8px;
+  gap: 7px;
+  margin-top: 4px;
   font-family: 'Space Mono', monospace;
   font-size: 11px;
   letter-spacing: 0.02em;
@@ -71,8 +72,8 @@
 }
 
 .footer-status-dot {
-  width: 6.5px;
-  height: 6.5px;
+  width: 6px;
+  height: 6px;
   border-radius: 50%;
   background: #10b981;
   box-shadow: 0 0 8px rgba(16, 185, 129, 0.5);
@@ -105,20 +106,10 @@
   margin: 0;
   font-family: 'Instrument Serif', Georgia, serif;
   font-style: italic;
-  font-size: clamp(17px, 1.4vw, 20px);
-  line-height: 1.4;
-  color: rgba(255, 255, 255, 0.78);
+  font-size: clamp(17px, 1.35vw, 20px);
+  line-height: 1.35;
+  color: rgba(255, 255, 255, 0.75);
   letter-spacing: -0.01em;
-}
-
-.footer-philosophy-author {
-  display: block;
-  margin-top: 6px;
-  font-family: 'Space Mono', monospace;
-  font-size: 10px;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.32);
 }
 
 /* Col 3: Signals Links */
@@ -132,24 +123,16 @@
   }
 }
 
-.footer-links-heading {
-  font-family: 'Space Mono', monospace;
-  font-size: 10px;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.35);
-  margin-bottom: 4px;
-}
-
 .footer-links-grid {
   display: flex;
-  flex-direction: column;
-  gap: 7px;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 16px;
 }
 
 @media (min-width: 861px) {
   .footer-links-grid {
-    align-items: flex-end;
+    justify-content: flex-end;
   }
 }
 
@@ -167,7 +150,7 @@
 
 .footer-nav-link:hover {
   color: #ffffff;
-  transform: translateX(-1px);
+  transform: translateY(-1px);
 }
 
 .footer-link-icon {
@@ -184,7 +167,7 @@
 .footer-bottom-bar {
   width: 100%;
   border-top: 1px solid rgba(255, 255, 255, 0.05);
-  padding-top: 24px;
+  padding-top: 20px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -198,26 +181,13 @@
   align-items: center;
   gap: 8px;
   font-family: 'Space Mono', monospace;
-  font-size: 10px;
-  letter-spacing: 0.06em;
+  font-size: 10.5px;
+  letter-spacing: 0.04em;
   color: rgba(255, 255, 255, 0.35);
 }
 
 .footer-legal-sep {
   opacity: 0.4;
-}
-
-.footer-stack-tag {
-  font-family: 'Space Mono', monospace;
-  font-size: 10px;
-  letter-spacing: 0.08em;
-  color: rgba(255, 255, 255, 0.28);
-}
-
-@media (max-width: 720px) {
-  .footer-stack-tag {
-    display: none;
-  }
 }
 
 .footer-top-btn {
@@ -274,14 +244,6 @@
   color: rgba(9, 9, 11, 0.85);
 }
 
-[data-theme="light"] .footer-philosophy-author {
-  color: rgba(9, 9, 11, 0.4);
-}
-
-[data-theme="light"] .footer-links-heading {
-  color: rgba(9, 9, 11, 0.4);
-}
-
 [data-theme="light"] .footer-nav-link {
   color: rgba(9, 9, 11, 0.7);
 }
@@ -296,10 +258,6 @@
 
 [data-theme="light"] .footer-legal {
   color: rgba(9, 9, 11, 0.45);
-}
-
-[data-theme="light"] .footer-stack-tag {
-  color: rgba(9, 9, 11, 0.35);
 }
 
 [data-theme="light"] .footer-top-btn {

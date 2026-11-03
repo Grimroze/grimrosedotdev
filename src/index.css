@@ -98,89 +98,151 @@ body, #root {
   }
 }
 
-/* Master Dock for Navigation & Pastel Toggle Dot */
-.nav-master-dock {
+/* ========================================================
+   UNIFIED DYNAMIC ISLAND NAVIGATION CAPSULE
+   Ultra-Smooth Apple Hardware-Grade Morphing Dock
+   ======================================================== */
+
+.nav-island-dock {
+  position: relative;
   display: flex;
   align-items: center;
-  gap: 14px;
-  height: 44px; /* Locked height prevents any vertical shifting */
-  overflow: visible;
+  height: 42px;
+  border-radius: 9999px;
+  background: rgba(14, 14, 18, 0.65);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 10px 30px -8px rgba(0, 0, 0, 0.6), 0 2px 8px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(20px) saturate(1.6);
+  -webkit-backdrop-filter: blur(20px) saturate(1.6);
+  box-sizing: border-box;
+  padding: 0 6px 0 0;
+  overflow: hidden;
+  will-change: width, box-shadow, border-color, background-color;
+  transition: width 0.42s cubic-bezier(0.16, 1, 0.3, 1),
+              background-color 0.3s ease,
+              border-color 0.3s ease,
+              box-shadow 0.42s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* Abstract Minimal Pastel Dot Button */
-.nav-pastel-trigger {
-  position: relative;
-  width: 36px;
-  height: 44px; /* Matches dock height */
+[data-theme="light"] .nav-island-dock {
+  background: rgba(255, 255, 255, 0.72);
+  border-color: rgba(0, 0, 0, 0.1);
+  box-shadow: 0 12px 32px -8px rgba(0, 0, 0, 0.15), 0 2px 6px rgba(0, 0, 0, 0.06);
+}
+
+/* Collapsed State: Perfect 42px circular glass gem */
+.nav-island-dock.is-collapsed {
+  width: 42px;
+  cursor: pointer;
+  padding: 0;
+}
+
+.nav-island-dock.is-collapsed:hover {
+  border-color: rgba(255, 255, 255, 0.28);
+  box-shadow: 0 14px 36px -6px rgba(0, 0, 0, 0.7), 0 0 16px rgba(250, 210, 225, 0.25);
+  transform: translateY(-1px);
+}
+
+[data-theme="light"] .nav-island-dock.is-collapsed:hover {
+  border-color: rgba(0, 0, 0, 0.22);
+  box-shadow: 0 14px 36px -6px rgba(0, 0, 0, 0.18), 0 0 16px rgba(0, 0, 0, 0.08);
+  transform: translateY(-1px);
+}
+
+/* Expanded State: Fluidly elongated sleek glass pill */
+.nav-island-dock.is-expanded {
+  width: 362px;
+}
+
+@media (max-width: 480px) {
+  .nav-island-dock.is-expanded {
+    max-width: calc(100vw - 32px);
+    width: 340px;
+  }
+}
+
+/* The Anchor Button on the left */
+.nav-island-dot-trigger {
+  width: 42px;
+  height: 42px;
+  min-width: 42px;
+  padding: 0;
+  margin: 0;
   border: none;
   background: transparent;
-  padding: 0;
-  cursor: pointer;
-  outline: none;
   display: flex;
   align-items: center;
   justify-content: center;
+  cursor: pointer;
   flex-shrink: 0;
+  outline: none;
   -webkit-tap-highlight-color: transparent;
+  z-index: 2;
 }
 
-/* The Abstract Minimal Pastel Dot - Pure Classic Style */
-.pastel-dot {
-  width: 13px;
-  height: 13px;
+/* Living Breathing Pastel Dot */
+.nav-living-dot {
+  width: 12px;
+  height: 12px;
   border-radius: 50%;
-  background: #fad2e1; /* Elegant minimal pastel rose */
-  box-shadow: 0 0 14px rgba(250, 210, 225, 0.55);
-  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+  background: #fad2e1;
+  box-shadow: 0 0 12px rgba(250, 210, 225, 0.6);
+  transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1),
               background-color 0.25s ease,
-              box-shadow 0.25s ease;
+              box-shadow 0.28s ease;
 }
 
-.nav-pastel-trigger:hover .pastel-dot {
-  transform: scale(1.3);
-  background: #ffffff;
-  box-shadow: 0 0 18px rgba(250, 210, 225, 0.95);
+.nav-island-dock:hover .nav-living-dot {
+  transform: scale(1.18);
+  box-shadow: 0 0 16px rgba(250, 210, 225, 0.95);
 }
 
-.nav-pastel-trigger.is-open .pastel-dot {
+.nav-island-dock.is-expanded .nav-living-dot {
+  transform: scale(0.9);
   background: #f8edeb;
-  transform: scale(0.92);
+  opacity: 0.85;
 }
 
-/* Expanding / Collapsing Navigation Bar Track */
-.nav-bar-wrapper {
+[data-theme="light"] .nav-living-dot {
+  background: #18181b;
+  box-shadow: 0 0 8px rgba(24, 24, 27, 0.3);
+}
+
+[data-theme="light"] .nav-island-dock:hover .nav-living-dot {
+  box-shadow: 0 0 12px rgba(24, 24, 27, 0.5);
+  transform: scale(1.18);
+}
+
+[data-theme="light"] .nav-island-dock.is-expanded .nav-living-dot {
+  background: #3f3f46;
+  transform: scale(0.9);
+}
+
+/* Menu items container (Smoothly revealed inside the single unified capsule) */
+.nav-island-menu {
   display: flex;
   align-items: center;
-  height: 44px; /* Strictly locked height */
-  transform-origin: left center;
-  will-change: width, opacity, transform, filter;
-  transition: width 0.38s cubic-bezier(0.16, 1, 0.3, 1),
-              opacity 0.28s cubic-bezier(0.16, 1, 0.3, 1),
-              transform 0.38s cubic-bezier(0.16, 1, 0.3, 1),
-              filter 0.32s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.nav-bar-wrapper.open {
-  width: 326px; /* Exact measured width for Home, About, Work, Connect */
-  max-width: calc(100vw - 80px);
-  opacity: 1;
-  transform: translateX(0) scale(1);
-  filter: blur(0px);
-  pointer-events: auto;
-  overflow: visible; /* Allows gooey liquid drops to burst freely outside the bar */
-}
-
-.nav-bar-wrapper.closed {
-  width: 0px;
-  opacity: 0;
-  transform: translateX(-12px) scale(0.94);
-  filter: blur(5px);
+  height: 100%;
+  flex-shrink: 0;
+  white-space: nowrap;
   pointer-events: none;
-  overflow: hidden; /* Cleanly hidden when minimized */
+  opacity: 0;
+  transform: translateX(-8px);
+  transition: opacity 0.18s ease,
+              transform 0.22s ease;
 }
 
-/* Ensure the GooeyNav never squishes or wraps its text during expand/collapse */
-.nav-bar-wrapper .gooey-nav {
+.nav-island-dock.is-expanded .nav-island-menu {
+  pointer-events: auto;
+  opacity: 1;
+  transform: translateX(0);
+  transition: opacity 0.28s cubic-bezier(0.16, 1, 0.3, 1) 0.08s,
+              transform 0.32s cubic-bezier(0.16, 1, 0.3, 1) 0.06s;
+}
+
+/* Ensure the GooeyNav never squishes or wraps its text */
+.nav-island-menu .gooey-nav {
   flex-shrink: 0;
   width: max-content;
   white-space: nowrap;
@@ -1250,23 +1312,7 @@ body, #root {
   box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15);
 }
 
-/* Light Theme: Sleek, high-contrast tactile navigation trigger dot */
-[data-theme="light"] .pastel-dot {
-  background: #18181b;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.22), 0 0 0 1.5px rgba(0, 0, 0, 0.1);
-}
 
-[data-theme="light"] .nav-pastel-trigger:hover .pastel-dot {
-  background: #000000;
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35), 0 0 0 2px rgba(0, 0, 0, 0.18);
-  transform: scale(1.3);
-}
-
-[data-theme="light"] .nav-pastel-trigger.is-open .pastel-dot {
-  background: #27272a;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.18);
-  transform: scale(0.92);
-}
 
 [data-theme="light"] .mini-folder-badge {
   color: rgba(0, 0, 0, 0.6);

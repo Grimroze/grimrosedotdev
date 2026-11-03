@@ -518,6 +518,7 @@ export default function App() {
       {!showPreloader && heroReady && (
         <AiOrbTrigger
           isOpen={isAiOpen}
+          theme={theme}
           onToggle={() => setIsAiOpen(prev => !prev)}
         />
       )}
@@ -572,38 +573,47 @@ export default function App() {
         ready={!showPreloader && heroReady}
       />
 
-      {/* 2. Floating Navigation with Minimal Pastel Dot Toggle */}
-      <div className={`nav-cinematic-enter nav-master-dock ${heroReady ? 'dock-enter' : 'dock-pending'}`}>
-        {/* Abstract Minimal Pastel Dot Button */}
-        <button
-          onClick={() => setIsNavOpen(prev => !prev)}
-          className={`nav-pastel-trigger ${isNavOpen ? 'is-open' : 'is-closed'}`}
-          aria-label={isNavOpen ? 'Minimize navigation' : 'Expand navigation'}
-          title={isNavOpen ? 'Click to minimize navigation' : 'Click to expand navigation'}
+      {/* 2. Floating Unified Dynamic Island Navigation Dock */}
+      <div className={`nav-cinematic-enter ${heroReady ? 'dock-enter' : 'dock-pending'}`}>
+        <div
+          className={`nav-island-dock ${isNavOpen ? 'is-expanded' : 'is-collapsed'}`}
+          onClick={!isNavOpen ? () => setIsNavOpen(true) : undefined}
         >
-          <span className="pastel-dot" />
-        </button>
+          {/* Integrated Living Pastel Dot Trigger Anchor */}
+          <button
+            type="button"
+            onClick={(e) => {
+              e.stopPropagation();
+              setIsNavOpen(prev => !prev);
+            }}
+            className="nav-island-dot-trigger"
+            aria-label={isNavOpen ? 'Minimize navigation' : 'Expand navigation'}
+            title={isNavOpen ? 'Click to minimize navigation' : 'Click to expand navigation'}
+          >
+            <span className="nav-living-dot" />
+          </button>
 
-        {/* Expandable Navigation Bar */}
-        <div className={`nav-bar-wrapper ${isNavOpen ? 'open' : 'closed'}`}>
-          <GooeyNav
-            items={NAV_ITEMS}
-            activeIndex={activeNavIndex}
-            initialActiveIndex={0}
-            isOpen={isNavOpen}
-            theme={theme}
-            size="sm"
-            color={theme === 'light' ? '#18181b' : '#faedf1'}
-            frame={true}
-            particleCount={32}
-            spread={100}
-            animationTime={600}
-            timeVariance={300}
-            gooeyness={1}
-            wobble={0.5}
-            hoverEffect={true}
-            onChange={handleNavChange}
-          />
+          {/* Navigation Items (Smoothly revealed inside the single unified capsule) */}
+          <div className="nav-island-menu">
+            <GooeyNav
+              items={NAV_ITEMS}
+              activeIndex={activeNavIndex}
+              initialActiveIndex={0}
+              isOpen={isNavOpen}
+              theme={theme}
+              size="sm"
+              color={theme === 'light' ? '#18181b' : '#faedf1'}
+              frame={false}
+              particleCount={32}
+              spread={100}
+              animationTime={600}
+              timeVariance={300}
+              gooeyness={1}
+              wobble={0.5}
+              hoverEffect={true}
+              onChange={handleNavChange}
+            />
+          </div>
         </div>
       </div>
 

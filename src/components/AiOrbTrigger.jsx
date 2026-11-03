@@ -8,7 +8,7 @@ import './AiOrbTrigger.css';
  * - Automatically fades out smoothly when scrolling anywhere (up or down)
  * - Glides and fades back in smoothly when scrolling stops
  */
-export default function AiOrbTrigger({ isOpen, onToggle }) {
+export default function AiOrbTrigger({ isOpen, onToggle, theme = 'dark' }) {
   const [isScrolling, setIsScrolling] = useState(false);
   const scrollTimeoutRef = useRef(null);
 
@@ -32,8 +32,10 @@ export default function AiOrbTrigger({ isOpen, onToggle }) {
     };
   }, []);
 
+  const isLight = theme === 'light';
+
   return (
-    <div className={`ai-orb-launcher ${isScrolling ? 'is-scrolling' : 'is-idle'}`}>
+    <div className={`ai-orb-launcher ${isScrolling ? 'is-scrolling' : 'is-idle'} ${isLight ? 'is-light' : 'is-dark'}`} data-theme={theme}>
       <button
         type="button"
         className={`ai-orb-btn ${isOpen ? 'is-active' : ''}`}
@@ -45,6 +47,7 @@ export default function AiOrbTrigger({ isOpen, onToggle }) {
             glass={true}
             interactive={true}
             clickPulse={true}
+            lightMode={isLight}
           />
         </div>
       </button>
